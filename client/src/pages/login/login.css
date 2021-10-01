@@ -1,0 +1,16 @@
+.loginerrmodal-body {
+    text-align: center !important;
+}
+.loginerrmodal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 0, 0, 0.623);
+    height: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: center !important;
+}
+.loginerrmodal-title {
+    text-align: center !important;
+}

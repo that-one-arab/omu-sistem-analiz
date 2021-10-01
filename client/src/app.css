@@ -1,0 +1,9 @@
+.apploader {
+    transition: all 200ms;
+    background-color: rgba(0, 0, 0, 0.438);
+    height: 100vh;
+    /* font-size: 80px; */
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}

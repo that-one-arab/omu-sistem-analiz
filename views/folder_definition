@@ -1,0 +1,12 @@
+/emailverification
+    emailVerified.ejs: 
+        shows the user that their account email is verified, an 'a' tag
+        takes the user to login page. that tag's href is dynamically inputted using the 'loginPage' argument.
+    verifyEmail.ejs:
+        shows the user a veify email page, requests the user to click on the link which is an 'a' tag, that
+        tag's href is dynamically inputted using the 'verifyEmailID' argument
+/resetpassword
+    passresetlinkexpired:
+        shows the user that their clicked link has expired.
+    enternewpass:
+        its a react build; that has password form fields that the user can submit in order to reset their password 

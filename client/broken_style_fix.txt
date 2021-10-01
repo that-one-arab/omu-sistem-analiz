@@ -1,0 +1,15 @@
+
+STYLE FIX IF COREUI UPDATES BY MISTAKE:
+
+npm uninstall @coreui/coreui
+npm install @coreui/coreui@3.4.0
+--- CHECK VERSION
+
+npm uninstall sass
+npm install sass@1.32.8
+--- CHECK VERSION
+
+
+npm uninstall @coreui/icons
+npm install @coreui/icons@2.0.0
+CHECK VERSION

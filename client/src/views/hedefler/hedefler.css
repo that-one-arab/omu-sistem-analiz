@@ -1,0 +1,28 @@
+#date-fields-div {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#month-year-seperator-slash {
+    position: relative;
+    top: 5px;
+}
+
+#add-goal-div-row {
+    margin-bottom: 70px;
+    position: relative;
+}
+
+#add-goal-div-row-button {
+
+    position: absolute;
+    right: 0;
+}
+
+#AddGoal-modal-footer-div {
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+}

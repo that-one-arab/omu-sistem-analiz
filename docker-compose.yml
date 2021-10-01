@@ -1,0 +1,18 @@
+version: "3.7"
+services: 
+  db:
+    image: postgres
+    environment: 
+      POSTGRES_DB: varoliletisim
+      POSTGRES_PASSWORD: crossmyheart1243
+      POSTGRES_USER: postgres
+    volumes: 
+      - ./postgres_vol:/var/lib/postgresql/data
+    ports: 
+      - '5000:5432'
+  web:
+    image: b2b-iys/node
+    depends_on:
+      - db
+    ports: 
+      - "4000:8080"
