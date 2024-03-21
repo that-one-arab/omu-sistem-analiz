@@ -25,7 +25,10 @@ function Modal(props) {
         return (
             <CModal 
             show={props.modalOn}
-            onClose={() => props.setModal(!props.modalOn)}
+            onClose={() => {
+                props.setModal(!props.modalOn)
+                props.onClose && props.onClose()
+                }}
             color={props.color}
             centered
             >
@@ -36,7 +39,12 @@ function Modal(props) {
                     <h5 style = {{textAlign: "center"}}>{props.body}</h5>
                 </CModalBody>
                 <CModalFooter>
-                    <CButton color="secondary" onClick={() => props.setModal(!props.modalOn)}>Kapat</CButton>
+                    <CButton color="secondary" onClick={() => {
+                        props.setModal(!props.modalOn)
+                        props.onClose && props.onClose()
+                    }}>
+                        Kapat
+                    </CButton>
                 </CModalFooter>
             </CModal>
         )

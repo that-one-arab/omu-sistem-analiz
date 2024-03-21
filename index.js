@@ -1,4 +1,3 @@
-//are you okay brah
 const Bree = require('bree')
 const express = require('express')
 const app = express()
@@ -11,6 +10,7 @@ const dealerRoute = require('./controller/routes/dealer')
 const sdRoute = require('./controller/routes/sd')
 const sdcRoute = require('./controller/routes/sdc')
 
+// eslint-disable-next-line require-jsdoc
 function startServer() {
     const bree = new Bree({
         jobs: [
@@ -38,6 +38,7 @@ function startServer() {
     app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
 }
 
+// eslint-disable-next-line require-jsdoc
 async function connectDB() {
     let retries = 5
     while (retries) {

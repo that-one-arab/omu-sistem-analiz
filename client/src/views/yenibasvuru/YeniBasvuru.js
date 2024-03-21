@@ -182,8 +182,12 @@ const Activator = () => {
             }
         })
         if (res.status === 200) {
-            const fetchData = await res.json()
-            setActivator(fetchData.name)
+            try {
+                const fetchData = await res.json()
+                setActivator(fetchData.name)
+            } catch (error) {
+                setActivator("Bilinmeyen kişi")
+            }
         }
     }
 

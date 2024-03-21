@@ -89,7 +89,7 @@ const sendApplication = async (userInfo, reqBody, photoURLS, res) => {
 
     const client = await pool.connect()
     try {
-        //begin the query transaction
+        // begin the query transaction
         await client.query('BEGIN')
         // Get the sale activator for the respective application sender(dealer)
         const saleActivator = await getSaleActivator(userID, res)
@@ -101,7 +101,7 @@ const sendApplication = async (userInfo, reqBody, photoURLS, res) => {
             , [clientName, selectedService, selectedOffer, clientDescription, query.rows[0].id, photoURLS])
         // commit all the queries
         await client.query('COMMIT')
-        //end the query transaction
+        // end the query transaction
         res.status(200).json("Your application was sent successfully")
     }
      catch (e) {
@@ -116,5 +116,6 @@ const sendApplication = async (userInfo, reqBody, photoURLS, res) => {
 
 module.exports = {
     sendApplication,
-    verifyApplicationInput
+    verifyApplicationInput,
+    getSaleActivator,
 }
