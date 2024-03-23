@@ -61,7 +61,9 @@ const verifyLoginCredentials = async (req, res, next) => {
 }
 
 const generateAccessToken = (payload) => {
-    return jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: 180000 })
+    return jwt.sign(payload, process.env.TOKEN_SECRET, {
+        // expiresIn: 180000 // NO EXPIRATION
+    })
 }
 
 module.exports = {
