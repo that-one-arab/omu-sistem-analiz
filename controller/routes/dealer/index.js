@@ -18,11 +18,12 @@ const imageStorage = multer.diskStorage({
     // Destination to store image
     destination: 'controller/routes/dealer/temp/',
     filename: (req, file, cb) => {
+        const imageUniqID = `${Date.now()}-${uniqid.process()}`
         cb(
             null,
             file.fieldname +
                 '_yoyo_' +
-                Date.now() +
+                imageUniqID +
                 path.extname(file.originalname)
         )
     },
@@ -82,52 +83,22 @@ app.post(
                     401,
                     'user does not have premission to submit'
                 )
-            const { files } = req
-            console.log(files)
-            console.log(req.body)
             // Get the current highest application ID, to insert it into the file name when it's uploaded to cloudinary
             const highestApplicationIDQuery = await pool.query(
                 'SELECT MAX(id) FROM sales_applications;'
             )
             const highestApplicationID = highestApplicationIDQuery.rows[0].max
-            for (let i = 0; i < files.length; i++) {
-                const fileExtension = path
-                    .extname(files[i].originalname)
-                    .toLowerCase()
-                console.log('fileExtension', fileExtension)
-                const imageUniqID = `${userInfo.userID}-${uniqid.process()}`
-                console.log('imageUniqID', imageUniqID)
-                fs.renameSync(
-                    `${files[i].path}`,
-                    `${files[i].destination}${imageUniqID + fileExtension}`
-                )
-                console.log(
-                    `renamed to ${files[i].destination}/${
-                        imageUniqID + fileExtension
-                    }`
-                )
-            }
+
             const imageFolderPath = path.join(__dirname + '/temp')
-            console.log('imageFolderPath', imageFolderPath)
-            let dbImageURLS = []
+            const dbImageURLS = []
             fs.readdir(imageFolderPath, (err, filePaths) => {
-                console.log('in READDIR function...')
                 if (err)
                     return status500Error(
                         err,
                         res,
                         'An error occurred while uploading your application'
                     )
-                console.log(
-                    'passed readdir function, moving onto cloudinary upload loop...'
-                )
-                console.log('filePaths', filePaths)
                 for (let i = 0; i < filePaths.length; i++) {
-                    console.log('in cloudinary upload loop number ', i)
-                    console.log(
-                        'FILEPATH: ',
-                        __dirname + '/temp/' + filePaths[i]
-                    )
                     cloudinary.uploader.upload(
                         __dirname + '/temp/' + filePaths[i],
                         {
@@ -148,7 +119,6 @@ app.post(
                             } else {
                                 console.log(result)
                                 dbImageURLS.push(result.secure_url)
-                                console.log('deleting from storage...')
                                 fs.unlink(
                                     __dirname + '/temp/' + filePaths[i],
                                     async (err) => {
@@ -158,10 +128,8 @@ app.post(
                                                 res,
                                                 'An error occurred while uploading your application'
                                             )
-                                        console.log('deleted')
-                                        console.log('dbImageURLS', dbImageURLS)
                                         if (dbImageURLS.length === 3)
-                                            await sendApplication(
+                                            return await sendApplication(
                                                 userInfo,
                                                 req.body,
                                                 dbImageURLS,
@@ -177,7 +145,7 @@ app.post(
             })
         } catch (error) {
             console.error(error)
-            res.status(500)
+            return res.status(500)
         }
     }
 )

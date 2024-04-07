@@ -102,7 +102,7 @@ const sendApplication = async (userInfo, reqBody, photoURLS, res) => {
         // commit all the queries
         await client.query('COMMIT')
         // end the query transaction
-        res.status(200).json("Your application was sent successfully")
+        return res.status(200).json("Your application was sent successfully")
     }
      catch (e) {
         await client.query('ROLLBACK')
