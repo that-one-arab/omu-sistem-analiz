@@ -1,4 +1,4 @@
-const pool = require('./controller/database')
+const pool = require('../controller/database')
 const bcrypt = require('bcrypt')
 
 // Initiate the services table with 5 services
@@ -71,18 +71,43 @@ const initOffers = async () => {
     }
 }
 
-const initActivator = async () => {
-    const hash = await bcrypt.hash('test', 10)
-    await pool.query(
-        "INSERT INTO login(username, hash, role, active, register_date, email, name, assigned_area) VALUES($1, $2, 'sales_assistant', true, CURRENT_DATE, $3, $4, 'ilkadim') RETURNING email",
-        ['mervemutlu', hash, 'merve@test.com', 'Merve Mutlu']
-    )
+const initUsers = async () => {
+    const users = [
+        {
+            name: 'Test Bayi',
+            email: 'test@test.com',
+            password: 'test',
+            role: 'dealer',
+        },
+        {
+            name: 'Merve Mutlu',
+            email: 'sd@test.com',
+            password: 'test',
+            role: 'sales_assistant',
+        },
+        {
+            name: 'Remzi Muratoğlu',
+            email: 'sdc@test.com',
+            password: 'test',
+            role: 'sales_assistant_chef',
+        },
+    ]
+
+    for (let I = 0; I < users.length; I++) {
+        const user = users[I]
+
+        const hash = await bcrypt.hash(user.password, 10)
+        await pool.query(
+            "INSERT INTO login(username, hash, role, active, register_date, email, name, assigned_area) VALUES($1, $2, $3, true, CURRENT_DATE, $4, $5, 'ilkadim') RETURNING email",
+            [user.name, hash, user.role, user.email, user.name]
+        )
+    }
 }
 
 ;(async function () {
     await initServices()
     await initOffers()
-    await initActivator()
+    await initUsers()
     console.log('Services and offers initiated')
     process.exit(0)
 })()

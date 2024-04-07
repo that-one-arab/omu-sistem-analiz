@@ -1,4 +1,4 @@
-const pool = require('./controller/database')
+const pool = require('../controller/database')
 
 const statement = `
 -- Table: services
@@ -22,6 +22,7 @@ CREATE TABLE offers (
 -- Table: login
 CREATE TABLE login (
     user_id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL,
     name TEXT NOT NULL,
     hash TEXT NOT NULL,
     role TEXT NOT NULL,
