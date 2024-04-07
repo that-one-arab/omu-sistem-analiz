@@ -26,17 +26,23 @@ const BasvurularGoruntule = () => {
 
  useEffect(() => {
   const fetchData = async() => {
-    const res = await fetch("/sd/basvurular/goruntule", {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-        'authorization' :`Bearer ${document.cookie.slice(8)} `
-      }
-    })
-    const fetchData = await res.json()
-    const resData = mapDataToTurkish(fetchData)
-    setData(resData)
-    setLoading(false)
+    try {
+      const res = await fetch("/sd/basvurular/goruntule", {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization' :`Bearer ${document.cookie.slice(8)} `
+        }
+      })
+      const fetchData = await res.json()
+      const resData = mapDataToTurkish(fetchData)
+      setData(resData)
+      
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
    }
    fetchData();
  }, [])

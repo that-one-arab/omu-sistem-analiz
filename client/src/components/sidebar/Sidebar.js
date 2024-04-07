@@ -52,17 +52,6 @@ const TheSidebar = () => {
         }}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        {/* <CIcon
-          className="c-sidebar-brand-full"
-          src = {VarolLogoText}
-          // size = "lg"
-          height={130}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          src = {VarolLogo}
-          height={50}
-        /> */}
       </CSidebarBrand>
       <CSidebarNav>
 

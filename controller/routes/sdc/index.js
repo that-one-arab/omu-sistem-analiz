@@ -190,7 +190,7 @@ app.post("/service", authenticateToken, verifyReqBodyObjValuesNotEmpty, async (r
       return customStatusError(errorStrUnexpectedInput, res, 406, "Service already exists")
     }
     // VERIFICATION ENDS
-    const queryString = "INSERT INTO services(name, description, profitable) VALUES ($1, $2, $3)"
+    const queryString = "INSERT INTO services(name, description, profitable, active) VALUES ($1, $2, $3, true)"
     await pool.query(queryString, [newServiceName, newServiceDescription, isProfitable])
     return res.status(200).json("Your service was added successfully!")
   } catch (err) {

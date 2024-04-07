@@ -5,7 +5,8 @@ const statement = `
 CREATE TABLE services (
     service_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    active BOOLEAN NOT NULL,
+    active BOOLEAN,
+    description TEXT,
     profitable BOOLEAN
 );
 
@@ -16,6 +17,7 @@ CREATE TABLE offers (
     name TEXT NOT NULL,
     active BOOLEAN NOT NULL,
     value NUMERIC,
+    description TEXT,
     FOREIGN KEY (service_id) REFERENCES services(service_id)
 );
 
@@ -90,6 +92,7 @@ CREATE TABLE goals (
     success BOOLEAN NOT NULL,
     for_date DATE NOT NULL,
     service TEXT NOT NULL,
+    service_id INTEGER NOT NULL,
     for_user_id INTEGER NOT NULL,
     FOREIGN KEY (for_user_id) REFERENCES login(user_id)
 );
