@@ -57,6 +57,7 @@ CREATE TABLE sales_applications_details (
     status_change_date TIMESTAMP,
     final_sales_rep_details TEXT,
     image_urls TEXT[],
+    client_name TEXT NOT NULL,
     FOREIGN KEY (id) REFERENCES sales_applications(id),
     FOREIGN KEY (selected_service) REFERENCES services(service_id),
     FOREIGN KEY (selected_offer) REFERENCES offers(offer_id)
