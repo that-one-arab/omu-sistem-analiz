@@ -259,6 +259,10 @@ const YeniBasvuru = () => {
                     textFailurePayload.payload = {
                         text: "Dosya boyutu çok büyük, Dosya boyutu 1MB'dan büyük olamaz"
                     }
+                } else if (fetchData.toLowerCase().includes("please upload an image")) {
+                    textFailurePayload.payload = {
+                        text: "Geçersiz dosya türü, sadece .jpg, .jpeg gibi uzantılı dosyalar yüklenebilir"
+                    }
                 }
     
                 dispatch(textFailurePayload)
