@@ -6,7 +6,11 @@ const cloudinary = require('cloudinary').v2
 const pool = require('../../database')
 const uniqid = require('uniqid')
 const { authenticateToken } = require('../../helpers/middleware')
-const { sendApplication, verifyApplicationInput, getSaleActivator } = require('./functions')
+const {
+    sendApplication,
+    verifyApplicationInput,
+    getSaleActivator,
+} = require('./functions')
 const {
     status500Error,
     customStatusError,
@@ -170,8 +174,11 @@ app.get('/balance', authenticateToken, async (req, res) => {
 app.get('/activator', authenticateToken, async (req, res) => {
     const { userInfo } = res.locals
     try {
-        const activatorName = await getSaleActivator(userInfo.userID, res)
-        return res.status(200).json({name: activatorName})
+        const { name: activatorName } = await getSaleActivator(
+            userInfo.userID,
+            res
+        )
+        return res.status(200).json({ name: activatorName })
     } catch (err) {
         return status500Error(
             err,

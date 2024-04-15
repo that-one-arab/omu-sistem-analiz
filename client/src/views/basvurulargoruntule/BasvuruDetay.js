@@ -23,14 +23,14 @@ const BasvuruDetay = ({match}) => {
     }
   }
 
-  const renderBasvuruDetayFooter = (details) => {
+  const renderBasvuruDetayFooter = (details, submitDisabled) => {
     // if the application is on Hold (first status change)
     if (details.submitProcessNum === 2) {
       return (
         <div id = "basvuruDetay-footerButtons">
           {/* Here "true" in updateApp refers to sp optional parameter, if true it modifies the urlString in fetch */}
-          <CButton onClick = {() => updateApp("rejected", true)} size="md" color="danger"><i className="fas fa-ban"></i> İPTAL</CButton>
-          <CButton onClick = {()=> updateApp("approved", true)} size="md" color="success" className = "">
+          <CButton disabled={submitDisabled} onClick = {() => updateApp("rejected", true)} size="md" color="danger"><i className="fas fa-ban"></i> İPTAL</CButton>
+          <CButton disabled={submitDisabled} onClick = {()=> updateApp("approved", true)} size="md" color="success" className = "">
           <i className="fas fa-check-circle"></i> ONAYLA</CButton>
         </div>
       )
@@ -42,8 +42,8 @@ const BasvuruDetay = ({match}) => {
     } else {
       return (
         <div id = "basvuruDetay-footerButtons">
-          <CButton onClick = {() => updateApp("rejected")} size="md" color="danger"><i className="fas fa-ban"></i> İPTAL</CButton>
-          <CButton onClick = {()=> updateApp("processing")} size="md" color="warning" className = "basvuru-detay-submit-buttons-submit" >
+          <CButton disabled={submitDisabled} onClick = {() => updateApp("rejected")} size="md" color="danger"><i className="fas fa-ban"></i> İPTAL</CButton>
+          <CButton disabled={submitDisabled} onClick = {()=> updateApp("processing")} size="md" color="warning" className = "basvuru-detay-submit-buttons-submit" >
           <i className="fas fa-arrow-circle-up"></i> İŞLE</CButton>
         </div>
       )
@@ -247,7 +247,7 @@ const BasvuruDetay = ({match}) => {
             </CFormGroup>
             <CFormGroup row className = "basvuru-detay-submit-buttons my-0" >
               <CCol lg = "4">
-                {renderBasvuruDetayFooter(userDetails)}
+                {renderBasvuruDetayFooter(userDetails, !sdDetay)}
               </CCol>
             </CFormGroup>
           </CCardBody>

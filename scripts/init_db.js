@@ -43,7 +43,8 @@ CREATE TABLE sales_applications (
     status TEXT NOT NULL,
     last_change_date TIMESTAMP,
     client_name TEXT NOT NULL,
-    activator TEXT,
+    activator TEXT NOT NULL,
+    activator_id INTEGER NOT NULL,
     FOREIGN KEY (submitter) REFERENCES login(user_id)
 );
 

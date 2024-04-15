@@ -60,6 +60,7 @@ const convertDateInputToSQLInterval = (interval) => {
     return conditionTime
 }
 
+// Returns a report of the applications according to the services
 // This function runs through a special condition, it maps through all the services, and it returns an array of objects
 // each object has a unique key property which is the 'service', and a status count for each service. EG:
 //  {
@@ -70,26 +71,33 @@ const convertDateInputToSQLInterval = (interval) => {
 //     "processingCount": "3",
 //     "sentCount": "0",
 //   }
-const mapAppsAccordToServices = async (userID, date) => {
+const mapAppsAccordToServices = async (userID, date, role) => {
     const { month, year } = date
-    const FOR_SDC_GET_APPLICATION_CRITERIA_COUNT =
-        'SELECT COUNT(sales_applications.submitter) FROM sales_applications WHERE sales_applications.status = $1 AND sales_applications.id IN (SELECT id FROM sales_applications_details WHERE selected_service = $2) AND sales_applications.submitter = $3 AND EXTRACT(YEAR FROM sales_applications.submit_time) = $4'
-    // month condition statement
-    const extractMonthCondition =
-        ' AND EXTRACT(MONTH FROM sales_applications.submit_time) = $5'
+
     const services = await pool.query(
         'SELECT service_id, name FROM services WHERE active = true'
     )
     const statusArray = ['approved', 'rejected', 'processing', 'sent']
+
     // define the final query statement
-    let queryStatement = FOR_SDC_GET_APPLICATION_CRITERIA_COUNT
+    let queryStatement =
+        'SELECT COUNT(sales_applications.submitter) FROM sales_applications WHERE sales_applications.status = $1 AND sales_applications.id IN (SELECT id FROM sales_applications_details WHERE selected_service = $2) AND sales_applications.submitter = $3 AND EXTRACT(YEAR FROM sales_applications.submit_time) = $4'
+    if (['sales_assistant', 'sales_assistant_chef'].includes(role)) {
+        queryStatement = queryStatement.replace(
+            'AND sales_applications.submitter = $3',
+            'AND sales_applications.activator_id = $3'
+        )
+    }
     // insert the month query parameter into a temporary array
     const monthQueryParam = []
     // if month's value is equal to 'ALL', omit adding the month condition statement and the month query parameter, else add them.
     if (month !== 'ALL') {
-        queryStatement = queryStatement + extractMonthCondition
+        queryStatement =
+            queryStatement +
+            ' AND EXTRACT(MONTH FROM sales_applications.submit_time) = $5'
         monthQueryParam.push(month)
     }
+
     const result = []
     // mapping over the services array received from query
     for (let i = 0; i < services.rows.length; i++) {
@@ -138,7 +146,6 @@ const fetchAppsAccordToInterval = async (
     conditionArr,
     conditionQueryArr
 ) => {
-    console.info({conditionArr, conditionQueryArr})
     const conditionTime = conditionQueryArr[0]
     // verified condition params and query arrays
     const verifiedConditionParamsArr = []
@@ -201,13 +208,20 @@ const getDealerApplications = async (
     date = 'ALL',
     userID,
     status = 'ALL',
-    service = 'ALL'
+    service = 'ALL',
+    queryingUserRole
 ) => {
+    let userRole = null
+    if (userID !== 'ALL') {
+        const user = await getUser(userID)
+        userRole = user.role
+    }
+
     console.info('fetching applications')
     // Functions that return an early results according to a special condition
     if (service === 'MAP') {
         console.info('mapping applications according to services')
-        return mapAppsAccordToServices(userID, date)
+        return mapAppsAccordToServices(userID, date, userRole)
     }
     if (service === 'diger') {
         console.info('fetching other services')
@@ -383,9 +397,20 @@ const getSdcUser = async (userID, res) => {
     }
 }
 
+async function getUser(id) {
+    const statement = `
+    SELECT * FROM login WHERE user_id = $1
+    `
+
+    const result = await pool.query(statement, [id])
+
+    return result.rows[0]
+}
+
 module.exports = {
     getDealerApplications,
     getServices,
+    getUser,
     getSdUsers,
     getSdcUsers,
     getSdUser,

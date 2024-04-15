@@ -143,7 +143,8 @@ app.get('/applications/:query', authenticateToken, async (req, res) => {
                 dayObj,
                 userID,
                 status,
-                service
+                service,
+                res.locals.userInfo.role
             )
         }
         // ELSE IF the REQUEST QUERY date variables are interval
@@ -153,7 +154,8 @@ app.get('/applications/:query', authenticateToken, async (req, res) => {
                 interval,
                 userID,
                 status,
-                service
+                service,
+                res.locals.userInfo.role
             )
         return res.status(200).json(selectQuery)
     } catch (error) {
