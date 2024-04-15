@@ -5,8 +5,6 @@ const TheFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
-        <span className="ml-1">Created by </span>
-        <a href="https://muhammed-aldulaimi.com" target="_blank" rel="noopener noreferrer">Muhammed Aldulaimi</a>
       </div>
     </CFooter>
   )
