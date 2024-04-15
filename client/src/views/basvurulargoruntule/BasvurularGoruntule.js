@@ -96,7 +96,7 @@ const BasvurularGoruntule = () => {
                  size="sm"
                  onClick={() => history.push(`/basvurular/detay/${item.ID}`)}
                >
-                 Detailar
+                 Detaylar
                </CButton>
              </td>
              )

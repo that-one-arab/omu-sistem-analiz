@@ -62,10 +62,10 @@ const updateApplicationPhase2 = async (
         if (statusChange === 'approved') {
             // get the offer name and service name
             const getServiceAndOffer = await client.query(
-                'SELECT selected_service, selected_offer FROM sales_applications_details WHERE id = $1',
-                [appID]
+                'SELECT selected_service, selected_offer FROM sales_applications_details WHERE id = 3',
+                []
             )
-            const { selected_service, selected_offer } =
+            const { selected_service: serviceId, selected_offer: offerId } =
                 getServiceAndOffer.rows[0]
 
             // submitter holds the same value as user_id
@@ -75,15 +75,8 @@ const updateApplicationPhase2 = async (
             )
             const { submitter } = getSubmitter.rows[0]
 
-            // get the id of the service
-            const getServiceID = await client.query(
-                'SELECT service_id FROM services WHERE name = $1',
-                [selected_service]
-            )
-            const serviceID = getServiceID.rows[0].service_id
-
             // get the value (money) of that specific offer
-            const offerValue = await getOfferValue(serviceID, selected_offer)
+            const offerValue = await getOfferValue(serviceId, null, offerId)
 
             // user's balance before transaction
             const userBalanceBefore = await client.query(
@@ -97,8 +90,15 @@ const updateApplicationPhase2 = async (
 
             // insert the tranasction record
             const insertTransactionAndReturnID = await client.query(
-                'INSERT INTO transactions VALUES($1, $2, $3, $4, $5) RETURNING transaction_id',
-                [submitter, appID, balanceBefore, offerValue, balanceAfter]
+                'INSERT INTO transactions (user_id, app_id, amount, balance_before, balance_after, date) VALUES($1, $2, $3, $4, $5, $6) RETURNING transaction_id',
+                [
+                    submitter,
+                    appID,
+                    offerValue,
+                    balanceBefore,
+                    balanceAfter,
+                    new Date(),
+                ]
             )
             // update user's balance
             await client.query(
@@ -118,10 +118,10 @@ const updateApplicationPhase2 = async (
             // it's fullfilled or not (the goal barrem reached), if true, it updates success to true then performs the increment. if false, it performs the
             // increment regardless
             const checkGoalSuccessStatement =
-                "SELECT goal, done, goal_id FROM goals WHERE EXTRACT(month from for_date) = (SELECT date_part('month', (SELECT current_timestamp))) AND EXTRACT(year from for_date) = (SELECT date_part('year', (SELECT current_timestamp))) AND service = $1 AND for_user_id = $2"
+                "SELECT goal, done, goal_id FROM goals WHERE EXTRACT(month from for_date) = (SELECT date_part('month', (SELECT current_timestamp))) AND EXTRACT(year from for_date) = (SELECT date_part('year', (SELECT current_timestamp))) AND service_id = $1 AND for_user_id = $2"
             const checkGoalSuccessQuery = await client.query(
                 checkGoalSuccessStatement,
-                [selected_service, submitter]
+                [serviceId, submitter]
             )
             if (checkGoalSuccessQuery.rowCount === 1) {
                 if (

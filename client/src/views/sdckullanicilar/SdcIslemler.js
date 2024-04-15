@@ -78,7 +78,7 @@ const SdcIslemler = ({match, location}) => {
                  size="sm"
                  onClick={() => history.push(`/islem/${item.ID}`)}
                >
-                 Detailar
+                 Detaylar
                </CButton>
              </td>
              )

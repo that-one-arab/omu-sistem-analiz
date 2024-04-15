@@ -101,7 +101,7 @@ const BasvuruDetay = ({match}) => {
   const updateApp = async (statusChange, sp = false) => {
     let urlString
     if (sp)
-      urlString= `/application/${match.params.id}/sp`
+      urlString= `/application/${match.params.id}`
     else urlString= `/application/${match.params.id}`
     const res = await fetch(urlString, {
       method: 'PUT',

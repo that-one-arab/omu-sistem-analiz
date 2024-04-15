@@ -181,7 +181,7 @@ const SdcKullanicilar = () => {
                               size="sm"
                               onClick={() => history.push(`/sdc/kullanici/${item.ID}`)}
                             >
-                              Detailar
+                              Detaylar
                             </CButton>
                           </td>
                           )

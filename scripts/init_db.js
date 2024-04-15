@@ -58,6 +58,7 @@ CREATE TABLE sales_applications_details (
     final_sales_rep_details TEXT,
     image_urls TEXT[],
     client_name TEXT NOT NULL,
+    transaction_id INTEGER,
     FOREIGN KEY (id) REFERENCES sales_applications(id),
     FOREIGN KEY (selected_service) REFERENCES services(service_id),
     FOREIGN KEY (selected_offer) REFERENCES offers(offer_id)
@@ -92,7 +93,6 @@ CREATE TABLE goals (
     done INTEGER NOT NULL,
     success BOOLEAN NOT NULL,
     for_date DATE NOT NULL,
-    service TEXT NOT NULL,
     service_id INTEGER NOT NULL,
     for_user_id INTEGER NOT NULL,
     FOREIGN KEY (for_user_id) REFERENCES login(user_id)
