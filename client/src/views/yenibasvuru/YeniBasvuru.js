@@ -236,21 +236,38 @@ const YeniBasvuru = () => {
         for (let i = 0; i < applicationImages.length; i++) {
             formData.append("image", applicationImages[i])
         }
-        const res = await fetch("/applications", {
-            method: "POST",
-            headers: {
-                'authorization' :`Bearer ${document.cookie.slice(8)} `
-            },
-            body: formData
-        })
-        if (res.status === 200) {
-            setModalOn(true)
-            resetInput()
-            dispatch({type: "SET_MODAL_TEXT_SUCCESS"})
-        } else {
+
+        try {
+            const res = await fetch("/applications", {
+                method: "POST",
+                headers: {
+                    'authorization' :`Bearer ${document.cookie.slice(8)} `
+                },
+                body: formData
+            })
+            if (res.status === 200) {
+                setModalOn(true)
+                resetInput()
+                dispatch({type: "SET_MODAL_TEXT_SUCCESS"})
+            } else {
+                const textFailurePayload = {
+                    type: "SET_MODAL_TEXT_FAILURE",
+                }
+    
+                const fetchData = await res.text()
+                if (fetchData.toLowerCase().includes("file too large")) {
+                    textFailurePayload.payload = {
+                        text: "Dosya boyutu çok büyük, Dosya boyutu 1MB'dan büyük olamaz"
+                    }
+                }
+    
+                dispatch(textFailurePayload)
+                setModalOn(true)
+            }
+        } catch (error) {
             dispatch({type: "SET_MODAL_TEXT_FAILURE"})
-            setModalOn(true)
         }
+
         setLoading(false)
     }
 

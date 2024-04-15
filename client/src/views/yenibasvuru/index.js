@@ -162,9 +162,13 @@ export const reducer = (state = initialState, action) => {
                 modalTextObj: successText
             }
         case "SET_MODAL_TEXT_FAILURE":
+            const textObj = errorText
+            if (action.payload && action.payload.text) {
+                textObj.body = action.payload.text
+            }
             return {
                 ...state,
-                modalTextObj: errorText
+                modalTextObj: textObj
             }
         
         case "RESET_INPUT":
