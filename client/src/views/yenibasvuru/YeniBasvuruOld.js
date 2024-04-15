@@ -376,7 +376,7 @@ class YeniBasvuru extends React.Component {
                                 <CLabel htmlFor="disabled-input">Satış Sorumlusu</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CInput id="disabled-input" name="disabled-input" placeholder="Erdem Mutlu" disabled />
+                                <CInput id="disabled-input" name="disabled-input" placeholder="Merve Mutlu" disabled />
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>

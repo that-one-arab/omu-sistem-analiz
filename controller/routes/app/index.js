@@ -79,6 +79,7 @@ app.get('/service/:serviceID', async (req, res) => {
 // If the request submitter is SD or SDC, return application
 app.get('/application/:applicationID', authenticateToken, async (req, res) => {
     try {
+        console.info('application/:applicationID')
         const queryStatement =
             'SELECT sales_applications.id, sales_applications.client_name, sales_applications.submit_time, sales_applications_details.selected_service AS service_id, services.name AS service_name, sales_applications_details.selected_offer AS offer_id, offers.name AS offer_name, sales_applications_details.description, sales_applications.status, sales_applications_details.sales_rep_details, sales_applications_details.status_change_date, sales_applications_details.final_sales_rep_details, sales_applications.last_change_date, sales_applications_details.image_urls FROM sales_applications INNER JOIN sales_applications_details ON sales_applications.id=sales_applications_details.id INNER JOIN services ON services.service_id = sales_applications_details.selected_service INNER JOIN offers ON offers.offer_id = sales_applications_details.selected_offer WHERE sales_applications.id = $1'
         const submitterConditionalStatement = ' AND submitter = $2'
@@ -107,6 +108,7 @@ app.get('/application/:applicationID', authenticateToken, async (req, res) => {
                 )
         }
         // if all good return query
+        console.log(query.rows)
         return res.status(200).json(query.rows)
     } catch (err) {
         return status500Error(
@@ -118,13 +120,14 @@ app.get('/application/:applicationID', authenticateToken, async (req, res) => {
 })
 
 app.get('/applications/:query', authenticateToken, async (req, res) => {
-    const { query } = req.params
+    const { query } = req.params // query can be 'details' or 'count'
     const { status, interval, service, day, month, year } = req.query
 
     let userID
     if (
-        res.locals.userInfo.role !== 'sales_assistant_chef' &&
-        res.locals.userInfo.role !== 'sales_assistant'
+        !['sales_assistant_chef', 'sales_assistant'].includes(
+            res.locals.userInfo.role
+        )
     )
         userID = res.locals.userInfo.userID
     else if (req.query.userID) userID = req.query.userID

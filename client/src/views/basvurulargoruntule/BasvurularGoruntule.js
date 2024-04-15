@@ -27,7 +27,7 @@ const BasvurularGoruntule = () => {
  useEffect(() => {
   const fetchData = async() => {
     try {
-      const res = await fetch("/sd/basvurular/goruntule", {
+      const res = await fetch("/applications/details?interval=today", {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

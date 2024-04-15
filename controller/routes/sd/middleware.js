@@ -3,7 +3,7 @@ const pool = require("../../database")
 
 const verifyUpdateApplication = async (req, res, next) => {
     const userRole = "sales_assistant_chef"
-    const name = "Erdem Mutlu"
+    const name = "Merve Mutlu"
     // const { userRole, name } = res.locals.userInfo
     // if user does not have the appropriate role to update an application
     if (userRole !== "sales_assistant" && userRole !== "sales_assistant_chef")

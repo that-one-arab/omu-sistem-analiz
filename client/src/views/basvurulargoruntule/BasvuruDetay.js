@@ -9,7 +9,7 @@ const BasvuruDetay = ({match}) => {
   const applicationID = match.params.id
 
   const fetchData = async (setUserDetails) => {
-    const res = await fetch(`/applications/${applicationID}`, {
+    const res = await fetch(`/application/${applicationID}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -101,8 +101,8 @@ const BasvuruDetay = ({match}) => {
   const updateApp = async (statusChange, sp = false) => {
     let urlString
     if (sp)
-      urlString= `/basvurular/${match.params.id}/sp`
-    else urlString= `/basvurular/${match.params.id}`
+      urlString= `/application/${match.params.id}/sp`
+    else urlString= `/application/${match.params.id}`
     const res = await fetch(urlString, {
       method: 'PUT',
       headers: {

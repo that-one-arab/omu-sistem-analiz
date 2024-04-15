@@ -4,6 +4,7 @@ const {
     queryConstructorDate,
     customStatusError,
 } = require('../../helpers/functions')
+const { dealerApplicationsSql } = require('./utils')
 
 function verifyDateValues(dateObj) {
     const returnVal = []
@@ -137,6 +138,7 @@ const fetchAppsAccordToInterval = async (
     conditionArr,
     conditionQueryArr
 ) => {
+    console.info({conditionArr, conditionQueryArr})
     const conditionTime = conditionQueryArr[0]
     // verified condition params and query arrays
     const verifiedConditionParamsArr = []
@@ -156,7 +158,12 @@ const fetchAppsAccordToInterval = async (
         selectStatement,
         verifiedConditionQueryArr
     )
-    // console.log("Query string: ", queryString, "\n Condition params: ",  verifiedConditionParamsArr)
+    console.info(
+        'Query string: ',
+        queryString,
+        '\n Condition params: ',
+        verifiedConditionParamsArr
+    )
     const dbQuery = await pool.query(queryString, verifiedConditionParamsArr)
     // if query is details, return the entire array of objects, else return only the object in the array.
     return query === 'details' ? dbQuery.rows : dbQuery.rows[0]
@@ -196,23 +203,33 @@ const getDealerApplications = async (
     status = 'ALL',
     service = 'ALL'
 ) => {
+    console.info('fetching applications')
     // Functions that return an early results according to a special condition
-    if (service === 'MAP') return mapAppsAccordToServices(userID, date)
-    if (service === 'diger') return fetchDigerServices(userID)
-    // SELECT statements
-    const selectCount =
-        'SELECT count(*) FROM sales_applications INNER JOIN sales_applications_details ON sales_applications.id=sales_applications_details.id'
-    const selectDetails =
-        'SELECT sales_applications.id, sales_applications.client_name, sales_applications.submit_time, sales_applications_details.selected_service AS service_id, services.name AS service_name, sales_applications_details.selected_offer AS offer_id, offers.name AS offer_name, sales_applications_details.description, sales_applications.status, sales_applications_details.sales_rep_details, sales_applications_details.status_change_date, sales_applications_details.final_sales_rep_details, sales_applications.last_change_date, sales_applications_details.image_urls FROM sales_applications INNER JOIN sales_applications_details ON sales_applications.id=sales_applications_details.id INNER JOIN services ON services.service_id = sales_applications_details.selected_service INNER JOIN offers ON offers.offer_id = sales_applications_details.selected_offer'
-    const selectStatement = query === 'details' ? selectDetails : selectCount
+    if (service === 'MAP') {
+        console.info('mapping applications according to services')
+        return mapAppsAccordToServices(userID, date)
+    }
+    if (service === 'diger') {
+        console.info('fetching other services')
+        return fetchDigerServices(userID)
+    }
 
-    // CONDITION statements
-    const conditionSubmitter = 'sales_applications.submitter = '
-    const conditionStatus = 'sales_applications.status = '
-    const conditionService = 'sales_applications_details.selected_service = '
+    const {
+        selectCount,
+        selectDetails,
+        conditionSubmitter,
+        conditionStatus,
+        conditionService,
+        extractMonthCondition,
+        extractYearCondition,
+        extractDayCondition,
+    } = dealerApplicationsSql
+
+    const selectStatement = query === 'details' ? selectDetails : selectCount
 
     // IF user is querying as an interval(day, month, year)...
     if (typeof date === 'string' || typeof date === 'number') {
+        console.info('fetching applications according to interval')
         const interval = date
         const conditionTime = convertDateInputToSQLInterval(interval)
 
@@ -252,12 +269,6 @@ const getDealerApplications = async (
     } else {
         // ELSE if user is querying as an exact date with month and year format...
         const [day, month, year] = verifyDateValues(date)
-        const extractMonthCondition =
-            'EXTRACT(MONTH FROM sales_applications.submit_time) = '
-        const extractYearCondition =
-            'EXTRACT(YEAR FROM sales_applications.submit_time) = '
-        const extractDayCondition =
-            'EXTRACT(DAY FROM sales_applications.submit_time) = '
 
         const conditionArr = [day, month, Number(year), userID, status, service]
         const conditionQueryArr = [
