@@ -27,7 +27,7 @@ const BasvurularGoruntule = () => {
  useEffect(() => {
   const fetchData = async() => {
     try {
-      const res = await fetch("/applications/details?interval=today", {
+      const res = await fetch("/applications/details?interval=ALL", {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

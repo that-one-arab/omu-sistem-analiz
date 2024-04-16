@@ -24,6 +24,7 @@ export const mapDataToTurkish = (fetchData) => {
         return {
             ID: obj.id,
             İsim: obj.client_name,
+            Tip: obj.service_name,
             Tarih: submitDate.toISOString().slice(0, 10),
             Hizmet: obj.service_name,
             Kampanya: obj.offer_name,
