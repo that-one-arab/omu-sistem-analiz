@@ -11,6 +11,7 @@ import {
 import "./hedefler.css"
 import AddGoal from "./AddGoal"
 import { currentYear, currentMonth, mapGoalsData, fields, DateField, DealersField } from "."
+import customFetch from "../../custom-fetch";
 
 const Hedefler = () => {
     const [dealer, setDealer] = useState({})
@@ -23,7 +24,7 @@ const Hedefler = () => {
 
     const fetchGoals = async () => {
         setLoading(true)
-        const res = await fetch(`/goal?userID=${dealer.user_id}&month=${month}&year=${year}` , {
+        const res = await customFetch(`/goal?userID=${dealer.user_id}&month=${month}&year=${year}` , {
             headers: {
               'content-type': 'application/json',
               'authorization' :`Bearer ${document.cookie.slice(8)} `

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import SafeHOC from "../safehoc/SafeHOC";
+import customFetch from "../../custom-fetch";
 
 const AuthHOC = (props) => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const AuthHOC = (props) => {
   const history = useHistory();
   useEffect(() => {
     return history.listen(async (location) => {
-        const res = await fetch("/validate-token", {
+        const res = await customFetch("/validate-token", {
             method: 'GET',
             headers: {
               'content-type': 'application/json',

@@ -11,12 +11,13 @@ import { useState, memo } from 'react'
 import Toaster from "../../../../components/toaster/Toaster2"
 import HocLoader from '../../../hocloader/HocLoader'
 import { successObj, errorObj } from '../../index'
+import customFetch from '../../../../custom-fetch';
 
 const ConfirmDeleteModal = ({ modalOn, setModal, serviceID, toasters, triggerToaster, refetch }) => {
     const [loading, setLoading] = useState(false)
     const confirmDelete = async () => {
         setLoading(true)
-        const res = await fetch(`/service?serviceID=${serviceID}`, {
+        const res = await customFetch(`/service?serviceID=${serviceID}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',

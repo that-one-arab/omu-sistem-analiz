@@ -3,10 +3,11 @@ import { CDataTable, CBadge, CButton } from "@coreui/react";
 import { useHistory } from 'react-router-dom'
 import { mapDataToTurkish, getBadge } from "../../components/index";
 import qs from "qs"
+import customFetch from "../../custom-fetch";
 
 const fetchData = async(service, id, month, year) => {
-  // const res = await fetch(`/sdc/user/${id}/details?service=${service}`, {
-  const res = await fetch(`/applications/details?service=${service}&userID=${id}&month=${month}&year=${year}`, {
+  // const res = await customFetch(`/sdc/user/${id}/details?service=${service}`, {
+  const res = await customFetch(`/applications/details?service=${service}&userID=${id}&month=${month}&year=${year}`, {
     headers: {
       'content-type': 'application/json',
       'authorization' :`Bearer ${document.cookie.slice(8)} `

@@ -9,6 +9,7 @@ import {
   CRow,
   CPagination
 } from '@coreui/react'
+import customFetch from '../../custom-fetch';
 // import XLSX from "xlsx";
 
 const Rapor = () => {
@@ -41,7 +42,7 @@ const Rapor = () => {
     currentPage !== page && setPage(currentPage)
     const fetchData = async () => {
       setLoading(true)
-      const res = await fetch("/report/transactions", {
+      const res = await customFetch("/report/transactions", {
         headers: {
           'content-type': 'application/json',
           'authorization' :`Bearer ${document.cookie.slice(8)} `

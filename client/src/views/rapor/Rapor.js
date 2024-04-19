@@ -15,6 +15,7 @@ import {
 import XLSX from "xlsx";
 import { getBadge, mapDataToTurkish } from '../../components'
 import { switchRaporHeader } from "."
+import customFetch from '../../custom-fetch';
 
 // it returns a query string to allow for dynamic fetching from server
 const returnRaporQueryString = (queryObj) => {
@@ -64,7 +65,7 @@ const Rapor = ({match, location}) => {
     const fetchData = async () => {
       setLoading(true)
       const url = `/applications/details/?${qsQueryString}`
-      const res = await fetch(url, {
+      const res = await customFetch(url, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

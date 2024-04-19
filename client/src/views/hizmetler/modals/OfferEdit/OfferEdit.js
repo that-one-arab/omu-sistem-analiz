@@ -17,6 +17,7 @@ import { useEffect, useState, memo } from 'react'
 import Toaster from "../../../../components/toaster/Toaster2"
 import HocLoader from '../../../hocloader/HocLoader'
 import { successObj, errorObj } from '../../index'
+import customFetch from '../../../../custom-fetch';
 
 
 const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) => {
@@ -54,7 +55,7 @@ const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) =>
 
     async function handleSubmit() {
         const handleNameUpdate = async () => {
-            const res = await fetch(`/offer/name?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
+            const res = await customFetch(`/offer/name?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) =>
                 return false
         }
         const handleDescriptionUpdate = async () => {
-            const res = await fetch(`/offer/description?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
+            const res = await customFetch(`/offer/description?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) =>
                 return false
         }
         const handleValueUpdate = async () => {
-            const res = await fetch(`/offer/value?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
+            const res = await customFetch(`/offer/value?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',

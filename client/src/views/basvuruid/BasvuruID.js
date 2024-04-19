@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AppDataForm from '../../components/appdataform/AppDataForm'
 import { mapDataToTurkish } from "../../components/index";
 import HocLoader from "../hocloader/HocLoader"
+import customFetch from '../../custom-fetch';
 
 const BasvuruID = ({match, applicationID}) => {
   let appID
@@ -14,7 +15,7 @@ const BasvuruID = ({match, applicationID}) => {
   useEffect(() => {
     setLoading(true)
     const fetchData = async () => {
-      const res = await fetch(`/application/${appID}`,{
+      const res = await customFetch(`/application/${appID}`,{
           method: 'GET',
           headers: {
             'content-type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, memo } from "react"
 import { CSelect } from "@coreui/react"
 import "./hedefler.css"
+import customFetch from "../../custom-fetch";
 
 export function mapYears() {
     let dateArr = []
@@ -76,7 +77,7 @@ export const DealersField = memo(({setDealer}) => {
   
   useEffect(() => {
       const fetchData = async () => {
-          const res = await fetch(`/users`, {
+          const res = await customFetch(`/users`, {
               headers: {
                 'content-type': 'application/json',
                 'authorization' :`Bearer ${document.cookie.slice(8)} `

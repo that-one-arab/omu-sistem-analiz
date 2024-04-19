@@ -18,9 +18,7 @@ node_modules
 
 /client/npm-debug.log*
 /client/yarn-debug.log*
-<<<<<<< HEAD
 /client/yarn-error.log*
 .env
-=======
-/client/yarn-error.log*
->>>>>>> 4632ea0837c6373f8469a64f0ba45a834bf98747
+out/
+client/build/

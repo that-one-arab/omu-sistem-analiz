@@ -7,13 +7,14 @@ import {
   CCol
 } from '@coreui/react'
 import { crntYear, crntMonth } from "."
+import customFetch from '../../custom-fetch';
 
 const Widget = ({color, fetchFrom, pushToLink, text}) => {
   const history = useHistory()
   const [state, setState] = useState("0")
 
   const fetchAndSetState = async () => {
-      const res = await fetch(fetchFrom, {
+      const res = await customFetch(fetchFrom, {
         headers: {
           'content-type': 'application/json',
           'authorization' :`Bearer ${document.cookie.slice(8)} `

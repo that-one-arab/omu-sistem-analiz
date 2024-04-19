@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import AppDataForm from '../../components/appdataform/AppDataForm'
 import { mapDataToTurkish } from "../../components/index";
+import customFetch from '../../custom-fetch';
 
 const SdcIslem = ({match}) => {
   const applicationID = match.params.id
   const [data, setData] = useState({})
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/applications/${applicationID}`,{
+      const res = await customFetch(`/applications/${applicationID}`,{
           method: 'GET',
           headers: {
             'content-type': 'application/json',

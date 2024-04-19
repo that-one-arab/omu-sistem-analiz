@@ -5,9 +5,10 @@ import { useHistory } from 'react-router-dom'
 import HocLoader from '../hocloader/HocLoader'
 import "./style.css"
 import { mapUsersData } from '.'
+import customFetch from '../../custom-fetch';
 
 const fetchUserLoginDate = async (id) => {
-  const res = await fetch(`/user/${id}`, {
+  const res = await customFetch(`/user/${id}`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -22,7 +23,7 @@ const fetchUserLoginDate = async (id) => {
 
 const fetchSalesData = async (id, service, status, month, year) => {
   try {
-    const res = await fetch(`/applications/count/?service=${service}&status=${status}&userID=${id}&month=${month}&year=${year}`, {
+    const res = await customFetch(`/applications/count/?service=${service}&status=${status}&userID=${id}&month=${month}&year=${year}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

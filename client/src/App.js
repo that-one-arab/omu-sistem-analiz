@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import './scss/style.scss';
 import "./app.css";
 import AuthHOC from './views/authHOC/AuthHOC';
+import customFetch from './custom-fetch';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class App extends Component {
   componentDidMount() {
     (async () => {
     //validating token on first start
-    const res = await fetch("/validate-token", {
+    const res = await customFetch("/validate-token", {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

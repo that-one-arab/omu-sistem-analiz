@@ -14,6 +14,7 @@ import {
 } from '@coreui/react'
 import Modal from '../../components/modals/Modal'
 import Toaster from '../../components/toaster/Toaster'
+import customFetch from '../../custom-fetch';
 
 const Register = () => {
   const missingInfo = "Lütfen tüm alanları doldurunuz"
@@ -27,12 +28,12 @@ const Register = () => {
   }
   const modalEmailExistsObj = {
     header: "HATA",
-    body: "Bu kullanıcı mevcuttur. Lütfen şifrenizi yenileyin veya yeni hesap oluşturun",
+    body: "Bu kullanıcı mevcuttur. Lütfen yeni hesap oluşturun",
     color: "warning"
   }
   const modalSuccessObj = {
     header: "BAŞARILI",
-    body: "Talebiniz başarıyla işlenmiştir! Lütfen mail hesabınıza gelen onaylama mesajını kontrol ediniz",
+    body: "Hesabınız oluşturuldu. Lütfen giriş sayfasından giriş yapın",
     color: "success"
   }
   const [username, setUsername] = useState("")
@@ -89,7 +90,7 @@ const Register = () => {
 
   const onSubmit = async () => {
     if (verifyInput() && verifyEmail() && verifyPassword()) {
-      const res = await fetch("/register" , {
+      const res = await customFetch("/register" , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +125,11 @@ const Register = () => {
             return <Toaster key = {i} body = {element.body} show = {true} color = {"danger"} />
           })
         }
-        <Modal header = {modal.header} body = {modal.body} color = {modal.color} modalOn = {modalOn} setModal = {setModalOn}/>
+        <Modal header = {modal.header} body = {modal.body} color = {modal.color} modalOn = {modalOn} setModal = {setModalOn} onClose={() => {
+          if (modal.body === modalSuccessObj.body) {
+            window.location.href = "/login"
+          }
+        }} />
           <CRow className="justify-content-center">
             <CCol md="9" lg="7" xl="6">
               <CCard className="mx-4">

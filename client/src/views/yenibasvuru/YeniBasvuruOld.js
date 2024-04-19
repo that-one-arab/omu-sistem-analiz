@@ -27,6 +27,7 @@ import {
 import CIcon from '@coreui/icons-react';
 import "./yenibasvuru.css";
 import Loader from "../../components/loader/Loader"
+import customFetch from '../../custom-fetch';
 
 const MissingInfoModal = ({reset}) => {
     const [modalShow, setModalShow] = useState(true)
@@ -230,7 +231,7 @@ class YeniBasvuru extends React.Component {
             formData.append("image", image[i])            
         }
         try {
-          const res = await fetch("/applications", {
+          const res = await customFetch("/applications", {
             method: "POST",
             headers: {
             'authorization' :`Bearer ${document.cookie.slice(8)} `
@@ -329,7 +330,7 @@ class YeniBasvuru extends React.Component {
         }
         try {
           console.log("fetching")
-          const res = await fetch("/bayi/basvuru/yeni", {
+          const res = await customFetch("/bayi/basvuru/yeni", {
             method: "POST",
             headers: {
             'authorization' :`Bearer ${document.cookie.slice(8)} `

@@ -3,6 +3,7 @@ import { CDataTable, CBadge, CButton } from "@coreui/react";
 import { useHistory } from 'react-router-dom'
 import XLSX from "xlsx";
 import { mapDataToTurkish, getBadge } from '../../components/index'
+import customFetch from "../../custom-fetch";
 
 const BasvurularGoruntule = () => {
   const history = useHistory()
@@ -27,7 +28,7 @@ const BasvurularGoruntule = () => {
  useEffect(() => {
   const fetchData = async() => {
     try {
-      const res = await fetch("/applications/details?interval=ALL", {
+      const res = await customFetch("/applications/details?interval=ALL", {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

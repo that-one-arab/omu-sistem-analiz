@@ -17,9 +17,10 @@ import Modal from '../../components/modals/Modal';
 import { mapRoleToTurkish } from "../../components"
 import HocLoader from "../hocloader/HocLoader"
 import { useDispatch } from "react-redux"
+import customFetch from '../../custom-fetch';
 
 const patchPassword = async (password) => {
-    const res = await fetch('/user/password', {
+    const res = await customFetch('/user/password', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const patchPassword = async (password) => {
 }
 
 const patchName = async (name) => {
-    const res = await fetch('/user/name', {
+    const res = await customFetch('/user/name', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ const Hesap = () => {
     const [modalFields, setModalFields] = useState({})
 
     const fetchData = async () => {
-        const res = await fetch('/user', {
+        const res = await customFetch('/user', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',

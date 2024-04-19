@@ -8,6 +8,7 @@ import {
     CRow,
     CCol
 } from '@coreui/react'
+import customFetch from "../../custom-fetch";
 
 const percentage =(num, per) => {
   return (num/100)*per;
@@ -24,7 +25,7 @@ const HedefProgress = () => {
     const [data, setData] = useState([])
 
     const fetchData = async () => {
-        const res = await fetch('/goal?month=current&year=current', {
+        const res = await customFetch('/goal?month=current&year=current', {
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${document.cookie.slice(8)} `

@@ -16,6 +16,7 @@ import { Link } from "react-router-dom"
 import CIcon from '@coreui/icons-react'
 import Modal from '../../components/modals/Modal'
 import Toaster from '../../components/toaster/Toaster'
+import customFetch from '../../custom-fetch';
 
 const Test = () => {
 
@@ -32,13 +33,10 @@ const Test = () => {
   const onImageUpload = async () => {
     const formData = new FormData()
     formData.append("myFile", image)
-    console.log("img", image)
-    console.log("form data", formData)
     // const plainFormData = Object.fromEntries(formData.entries());
     // const formDataJsonString = JSON.stringify(plainFormData);
     try {
-      console.log("fetching")
-      const res = await fetch("/upload", {
+      const res = await customFetch("/upload", {
         method: "POST",
         body: formData
       })

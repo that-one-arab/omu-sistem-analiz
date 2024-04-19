@@ -14,6 +14,7 @@ import {
 } from '@coreui/react'
 import Modal from '../../components/modals/Modal'
 import Toaster from '../../components/toaster/Toaster'
+import customFetch from '../../custom-fetch';
 
 const ResetPasswordNew = () => {
   const unmatchedPassword = "Şifreniz uyuşmuyor, lütfen şifrelerinizi kontrol edin"
@@ -46,7 +47,7 @@ const ResetPasswordNew = () => {
 
   const onPasswordSubmit = async () => {
     if (verifyPassword()) {
-      const res = await fetch("/register" , {
+      const res = await customFetch("/register" , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

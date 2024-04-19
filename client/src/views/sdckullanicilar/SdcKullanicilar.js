@@ -16,6 +16,7 @@ import ToggleSwitch from '../../components/toggleswitch/ToggleSwitch'
 import HocLoader from '../hocloader/HocLoader'
 import Modal from "../../components/modals/Modal"
 import { compare, mapUsersData } from '.'
+import customFetch from '../../custom-fetch';
 
 const fields = [
   { key: 'ID', _style: { width: '20%'} },
@@ -60,7 +61,7 @@ const SdcKullanicilar = () => {
 
   const fetchData = async () => {
     setLoading(true)
-    const res = await fetch("/users", {
+    const res = await customFetch("/users", {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -79,7 +80,7 @@ const SdcKullanicilar = () => {
 
   const changeUserRole = async (newRole, userID) => {
     setLoading(true)
-    const res = await fetch(`/user/assign/role?userID=${userID}&toRole=${newRole}`, {
+    const res = await customFetch(`/user/assign/role?userID=${userID}&toRole=${newRole}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -96,7 +97,7 @@ const SdcKullanicilar = () => {
 
   const updateUserActiveState = async (userID) => {
     setLoading(true)
-    const res = await fetch(`/user/active/${userID}`, {
+    const res = await customFetch(`/user/active/${userID}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',

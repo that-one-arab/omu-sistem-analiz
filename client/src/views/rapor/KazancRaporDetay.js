@@ -12,6 +12,7 @@ import {
   CCollapse
 } from '@coreui/react'
 import BasvuruID from '../basvuruid/BasvuruID'
+import customFetch from '../../custom-fetch';
 // import XLSX from "xlsx";
 
 const fields = [
@@ -75,7 +76,7 @@ const RaporDetay = ({match, location}) => {
     currentPage !== page && setPage(currentPage)
     const fetchData = async () => {
       setLoading(true)
-      const res = await fetch(`/report/transactions?reportID=${id}`, {
+      const res = await customFetch(`/report/transactions?reportID=${id}`, {
         headers: {
           'content-type': 'application/json',
           'authorization' :`Bearer ${document.cookie.slice(8)} `

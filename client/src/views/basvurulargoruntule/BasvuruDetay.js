@@ -4,12 +4,13 @@ import "./basvurudetay.css"
 import { useHistory } from 'react-router-dom'
 import Modal from "../../components/modals/Modal"
 import { mapDataToTurkish } from '../../components/index'
+import customFetch from '../../custom-fetch';
 
 const BasvuruDetay = ({match}) => {
   const applicationID = match.params.id
 
   const fetchData = async (setUserDetails) => {
-    const res = await fetch(`/application/${applicationID}`, {
+    const res = await customFetch(`/application/${applicationID}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -103,7 +104,7 @@ const BasvuruDetay = ({match}) => {
     if (sp)
       urlString= `/application/${match.params.id}`
     else urlString= `/application/${match.params.id}`
-    const res = await fetch(urlString, {
+    const res = await customFetch(urlString, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',

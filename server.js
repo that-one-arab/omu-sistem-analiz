@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const Bree = require('bree')
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const pool = require('./controller/database')
 const path = require('path')
@@ -23,6 +24,8 @@ function startServer() {
         ],
     })
     bree.start()
+
+    app.use(cors())
 
     app.use(express.json())
     app.use(express.static(path.join(__dirname, 'client', 'build')))
@@ -51,6 +54,7 @@ async function connectDB() {
             client.release()
             // Start express server
             startServer()
+            console.log('DB HOST: ' + process.env.DB_HOST)
             break
         } catch (error) {
             console.log('Postgres database error: ', error)

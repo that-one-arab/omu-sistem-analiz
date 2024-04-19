@@ -19,6 +19,7 @@ import CIcon from '@coreui/icons-react'
 import "./login.css"
 import Modal from '../../components/modals/Modal';
 import HocLoader from '../../views/hocloader/HocLoader';
+import customFetch from '../../custom-fetch';
 
 class Login extends React.Component {
 
@@ -61,7 +62,7 @@ class Login extends React.Component {
         modalColor: "warning"
       })
     // verify email end
-    let res = await fetch("/login", {
+    let res = await customFetch("/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

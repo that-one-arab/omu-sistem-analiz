@@ -15,6 +15,7 @@ import { useEffect, useState, memo } from 'react'
 
 import Toaster from "../../components/toaster/Toaster2"
 import HocLoader from '../hocloader/HocLoader'
+import customFetch from '../../custom-fetch';
 
 const successObj = {
     color: "success",
@@ -75,7 +76,7 @@ const AddGoal = ({ modalOn, setModal, goals, dealer, month, year, toasters, trig
         const dealerID = dealer.user_id
         const dateString = `${year}-${month}-01`
         setLoading(true)
-        const res = await fetch(`/goal`, {
+        const res = await customFetch(`/goal`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,7 +103,7 @@ const AddGoal = ({ modalOn, setModal, goals, dealer, month, year, toasters, trig
     // fetch data use effect
     useEffect(() => {
         const fetchServices = async () => {
-            const res = await fetch(`/services?active=true` , {
+            const res = await customFetch(`/services?active=true` , {
                 headers: {
                   'content-type': 'application/json',
                   'authorization' :`Bearer ${document.cookie.slice(8)} `

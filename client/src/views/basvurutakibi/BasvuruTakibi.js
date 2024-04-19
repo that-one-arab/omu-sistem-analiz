@@ -12,6 +12,7 @@ import {
 } from '@coreui/react'
 import ApplicationViewModal from '.'
 import { mapDataToTurkish, getBadge } from "../../components/index"
+import customFetch from '../../custom-fetch';
 
 const BasvuruTakibi = () => {
   // code lines for setting up pagnation
@@ -32,7 +33,7 @@ const BasvuruTakibi = () => {
   useEffect(() => {
     currentPage !== page && setPage(currentPage)
     const getData = async () => {
-      const res = await fetch("/applications/details?interval=today", {
+      const res = await customFetch("/applications/details?interval=today", {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

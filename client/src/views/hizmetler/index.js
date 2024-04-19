@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react'
 
 import Toaster from "../../components/toaster/Toaster2"
 import HocLoader from '../hocloader/HocLoader'
+import customFetch from '../../custom-fetch';
 
 export const successObj = {
     color: "success",
@@ -63,7 +64,7 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
     }
 
     async function deleteOffer() {
-        const res = await fetch(`/offer/active?offerID=${offer.offer_id}`, {
+        const res = await customFetch(`/offer/active?offerID=${offer.offer_id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
 
     async function handleSubmit() {
         const handleNameUpdate = async () => {
-            const res = await fetch(`/offer/name?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
+            const res = await customFetch(`/offer/name?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -100,7 +101,7 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
                 return false
         }
         const handleDescriptionUpdate = async () => {
-            const res = await fetch(`/offer/description?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
+            const res = await customFetch(`/offer/description?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -117,7 +118,7 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
                 return false
         }
         const handleValueUpdate = async () => {
-            const res = await fetch(`/offer/value?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
+            const res = await customFetch(`/offer/value?offerID=${offer.offer_id}&forServiceID=${offer.service_id}`, {
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -225,7 +226,7 @@ export const ConfirmDeleteModal = ({ modalOn, setModal, serviceID, toasters, tri
 
     const confirmDelete = async () => {
         setLoading(true)
-        const res = await fetch(`/service/active?serviceID=${serviceID}`, {
+        const res = await customFetch(`/service/active?serviceID=${serviceID}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
@@ -295,7 +296,7 @@ export const ModifyService = ({ modalOn, setModal, service, toasters, triggerToa
 
     async function handleSubmit() {
         const handleNameUpdate = async () => {
-            const res = await fetch(`/service/name?serviceID=${serviceData.service_id}`, {
+            const res = await customFetch(`/service/name?serviceID=${serviceData.service_id}`, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -311,7 +312,7 @@ export const ModifyService = ({ modalOn, setModal, service, toasters, triggerToa
                 return false
         }
         const handleDescriptionUpdate = async () => {
-            const res = await fetch(`/service/description?serviceID=${serviceData.service_id}`, {
+            const res = await customFetch(`/service/description?serviceID=${serviceData.service_id}`, {
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -450,7 +451,7 @@ export const AddService = ({ modalOn, setModal, toasters, triggerToaster, refetc
 
     async function handleSubmit() {
         setLoading(true) 
-        const res = await fetch(`/service`, {
+        const res = await customFetch(`/service`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -596,7 +597,7 @@ export const AddOffer = ({ modalOn, setModal, toasters, triggerToaster, refetch,
 
     async function handleSubmit() {
         setLoading(true) 
-        const res = await fetch(`/offer`, {
+        const res = await customFetch(`/offer`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -14,6 +14,7 @@ import {
 } from '@coreui/react'
 import Modal from '../../components/modals/Modal'
 import Toaster from '../../components/toaster/Toaster'
+import customFetch from '../../custom-fetch';
 
 const ResetPassword = () => {
   const invalidEmail = "Lütfen girilen E-Mail adresini kontrol edin"
@@ -46,7 +47,7 @@ const ResetPassword = () => {
 
   const onEmailSubmit = async () => {
     if (verifyEmail()) {
-      const res = await fetch(`/resetpassword?email=${email}` , {
+      const res = await customFetch(`/resetpassword?email=${email}` , {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

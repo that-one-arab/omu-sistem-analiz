@@ -13,6 +13,7 @@ import {
 } from '@coreui/react';
 import HocLoader from "../hocloader/HocLoader"
 import { ModifyOffer, ConfirmDeleteModal, ModifyService, AddService, AddOffer } from '.';
+import customFetch from '../../custom-fetch';
 
 function mapOffersData(offers) {
     return offers.map(obj => {
@@ -66,7 +67,7 @@ const Hizmetler = () => {
 
     const fetchServices = async () => {
         setServicesLoading(true)
-        const res = await fetch("/services?active=true", {
+        const res = await customFetch("/services?active=true", {
             headers: {
               'content-type': 'application/json',
               'authorization' :`Bearer ${document.cookie.slice(8)} `
@@ -88,7 +89,7 @@ const Hizmetler = () => {
 
     const fetchOffers = async () => {
         setOffersLoading(true)
-        const res = await fetch(`/service/${selectedService}?active=true`, {
+        const res = await customFetch(`/service/${selectedService}?active=true`, {
             headers: {
               'content-type': 'application/json',
               'authorization' :`Bearer ${document.cookie.slice(8)} `

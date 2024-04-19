@@ -19,6 +19,7 @@ import CIcon from '@coreui/icons-react';
 import Modal from "../../components/modals/Modal"
 import HocLoader from "../hocloader/HocLoader"
 import { initialState, reducer } from "."
+import customFetch from '../../custom-fetch';
 
 const ApplicationImages = ({dispatch, applicationImages}) => {
     return (
@@ -73,7 +74,7 @@ const ApplicationImages = ({dispatch, applicationImages}) => {
 const Services = ({selectedService, dispatch}) => {
     const [services, setServices] = useState([])
     const fetchData = async () => {
-        const res = await fetch('/services', {
+        const res = await customFetch('/services', {
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${document.cookie.slice(8)} `
@@ -128,7 +129,7 @@ const Offers = ({dispatch, isServiceSelected, selectedServiceID, selectedOffer }
     }
     const fetchData = async () => {
         setFetching(true)
-        const res = await fetch(`/service/${selectedServiceID}`, {
+        const res = await customFetch(`/service/${selectedServiceID}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${document.cookie.slice(8)} `
@@ -175,7 +176,7 @@ const Offers = ({dispatch, isServiceSelected, selectedServiceID, selectedOffer }
 const Activator = () => {
     const [activator, setActivator] = useState("")
     const fetchData = async () => {
-        const res = await fetch('/activator', {
+        const res = await customFetch('/activator', {
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${document.cookie.slice(8)} `
@@ -238,7 +239,7 @@ const YeniBasvuru = () => {
         }
 
         try {
-            const res = await fetch("/applications", {
+            const res = await customFetch("/applications", {
                 method: "POST",
                 headers: {
                     'authorization' :`Bearer ${document.cookie.slice(8)} `

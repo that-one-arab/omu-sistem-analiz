@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const pool = require('../controller/database')
 
 const statement = `
