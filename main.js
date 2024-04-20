@@ -29,14 +29,14 @@ function createWindow() {
 
     console.info(
         'path to client build',
-        path.join(__dirname, '../client/build', 'index.html')
+        path.join(__dirname, '../build', 'index.html')
     )
 
     // Load the React app
     const startURL = isDev
         ? 'http://localhost:3000'
         : url.format({
-              pathname: path.join(__dirname, '../client/build', 'index.html'),
+              pathname: path.join(__dirname, '../build', 'index.html'),
               protocol: 'file:',
               slashes: true,
           })

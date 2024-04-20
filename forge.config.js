@@ -3,11 +3,17 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses')
 
 module.exports = {
     packagerConfig: {
-        extraResource: ['./client', './.env'],
+        extraResource: ['./client/build', './.env'],
         asar: true,
         // asar: {
         //     unpackDir: './client', // Directories to keep unpacked
         // },
+        ignore: [
+            // TODO: Can optimize this further by removing server files and node_modules too?
+            '^\\/client/node_modules$',
+            '^\\/[.].+',
+            // [...]
+        ],
     },
     rebuildConfig: {},
     makers: [
