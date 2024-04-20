@@ -1,11 +1,20 @@
-const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const { app, BrowserWindow } = require('electron')
+const isDev = !app.isPackaged
+
+require('dotenv').config({
+    path: isDev ? './.env' : path.join(__dirname, '../.env'),
+})
+
 const url = require('url')
+const fs = require('fs')
 
-// require('./server') // This will run the Express server
+console.info('process.env: ', process.env)
+console.info('db host: ', process.env.DB_HOST)
 
-// const isDev = !app.isPackaged
-const isDev = true
+require('./server') // This will run the Express server
+
+console.info('isDev:', isDev)
 
 // eslint-disable-next-line require-jsdoc
 function createWindow() {
@@ -20,14 +29,14 @@ function createWindow() {
 
     console.info(
         'path to client build',
-        path.join(__dirname, 'client/build', 'index.html')
+        path.join(__dirname, '../client/build', 'index.html')
     )
 
     // Load the React app
     const startURL = isDev
         ? 'http://localhost:3000'
         : url.format({
-              pathname: path.join(__dirname, 'client/build', 'index.html'),
+              pathname: path.join(__dirname, '../client/build', 'index.html'),
               protocol: 'file:',
               slashes: true,
           })
@@ -46,6 +55,33 @@ function createWindow() {
         win.webContents.openDevTools()
     }
 }
+
+app.on('ready', () => {
+    // List directories inside resources
+    const resourcesPath = path.join(process.resourcesPath)
+    fs.readdir(resourcesPath, (err, files) => {
+        if (err) {
+            console.error('Error reading resources directory', err)
+        } else {
+            console.log('Directories and files in resources:', files)
+            files
+                .filter((file) => {
+                    if (
+                        !fs
+                            .statSync(path.join(resourcesPath, file))
+                            .isDirectory()
+                    )
+                        console.log('File:', file)
+                    return fs
+                        .statSync(path.join(resourcesPath, file))
+                        .isDirectory()
+                })
+                .forEach((dir) => {
+                    console.log('Directory:', dir)
+                })
+        }
+    })
+})
 
 app.whenReady().then(createWindow)
 

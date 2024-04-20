@@ -3,7 +3,11 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses')
 
 module.exports = {
     packagerConfig: {
+        extraResource: ['./client', './.env'],
         asar: true,
+        // asar: {
+        //     unpackDir: './client', // Directories to keep unpacked
+        // },
     },
     rebuildConfig: {},
     makers: [
@@ -19,10 +23,10 @@ module.exports = {
             name: '@electron-forge/maker-deb',
             config: {},
         },
-        {
-            name: '@electron-forge/maker-rpm',
-            config: {},
-        },
+        // {
+        //     name: '@electron-forge/maker-rpm',
+        //     config: {},
+        // },
     ],
     plugins: [
         {
