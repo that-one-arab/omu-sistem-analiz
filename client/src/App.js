@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
+import { Offline, Online } from "react-detect-offline";
 import './scss/style.scss';
 import "./app.css";
 import AuthHOC from './views/authHOC/AuthHOC';
 import customFetch from './custom-fetch';
+import NoInternetConnectionImage from './images/no-internet-connection.webp';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -82,15 +84,28 @@ class App extends Component {
 
   render() {
     return (
-      <React.Suspense fallback={loading}>
-        <Switch>
-            <ErrorBoundary>
-              <AuthHOC>
-                <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
-              </AuthHOC>
-            </ErrorBoundary>
-        </Switch>
-      </React.Suspense>        
+      <React.Fragment>
+        <Offline>
+          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw', height: '100vh'}}>
+            <div className="text-center">
+              <h1>Uygulama Çalışmıyor</h1>
+              <img alt='no_internet_connection' src={NoInternetConnectionImage} />
+              <h3>Lütfen internet bağlantınızı kontrol edin</h3>
+            </div>
+          </div>
+        </Offline>
+        <Online>
+          <React.Suspense fallback={loading}>
+            <Switch>
+                <ErrorBoundary>
+                  <AuthHOC>
+                    <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
+                  </AuthHOC>
+                </ErrorBoundary>
+            </Switch>
+          </React.Suspense>        
+        </Online>
+      </React.Fragment>
     );
   }
 }
