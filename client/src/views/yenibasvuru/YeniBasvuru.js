@@ -305,8 +305,6 @@ const YeniBasvuru = () => {
                         Yeni Başvuru Sayfası
                     </CCardHeader>
                     <CCardBody>
-                            <Activator />
-
                             <Services dispatch = {dispatch} selectedService = {selectedService} />
                             
                             <Offers dispatch = {dispatch} isServiceSelected = {isServiceSelected} selectedServiceID = {selectedService} />
