@@ -876,7 +876,7 @@ app.post(
             }
             // VERIFICATION ENDS
             const queryString =
-                'INSERT INTO offers(name, description, service_id, value) VALUES ($1, $2, $3, $4)'
+                'INSERT INTO offers(name, description, service_id, value, active) VALUES ($1, $2, $3, $4, true)'
             await pool.query(queryString, [
                 newOfferName,
                 newOfferDescription,
