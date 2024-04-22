@@ -64,7 +64,7 @@ export const satisdestekchef_nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Kullanıcılar',
     to: '/sdc/kullanicilar',
-    icon: <i className="fas fa-home c-sidebar-nav-icon"></i>
+    icon: <i className="fas fa-users c-sidebar-nav-icon"></i>
   },
   {
     _tag: 'CSidebarNavTitle',
@@ -73,15 +73,15 @@ export const satisdestekchef_nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Hizmetler',
-    to: '/sdc/hizmetler',
-    icon: <i className="fas fa-home c-sidebar-nav-icon"></i>
+    to: '/sdc/hizmetler', 
+    icon: <i className="fas fa-layer-group c-sidebar-nav-icon"></i>
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Hedefler',
-    to: '/sdc/hedefler',
-    icon: <i className="fas fa-home c-sidebar-nav-icon"></i>
-  }
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'Hedefler',
+  //   to: '/sdc/hedefler',
+  //   icon: <i className="fas fa-home c-sidebar-nav-icon"></i>
+  // }
 ]
 
 
