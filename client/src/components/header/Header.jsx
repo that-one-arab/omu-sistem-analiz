@@ -53,12 +53,16 @@ const TheHeader = () => {
           null
         }
       </CHeaderNav>
-      <CHeaderNav className="px-3">
-        <div className="headerNavLinkFontFlex">
-          <p className = "headerNavLinkFontWelcome">Bakiyeniz</p>
-          <h6 className = "headerNavLinkFontUser">{Number(loggedInBalance).toFixed(2)}</h6>
-        </div>
-      </CHeaderNav>
+      {
+        loggedInRole === "dealer" && (
+          <CHeaderNav className="px-3">
+            <div className="headerNavLinkFontFlex">
+              <p className = "headerNavLinkFontWelcome">Bakiyeniz</p>
+              <h6 className = "headerNavLinkFontUser">{Number(loggedInBalance).toFixed(2)}</h6>
+            </div>
+          </CHeaderNav>
+        )
+      }
       <CHeaderNav className="px-3">
         <div className="headerNavLinkFontFlex">
           <p className = "headerNavLinkFontWelcome">Hoş Geldiniz</p>
