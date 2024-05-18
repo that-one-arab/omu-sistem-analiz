@@ -84,6 +84,17 @@ const Stok = () => {
     }
   };
 
+  const handleDelete = async (id, index) => {
+    try {
+      await customFetch(`/devices/${id}`, {
+        method: 'DELETE',
+      });
+      setDevices(devices.filter((_, i) => i !== index));
+    } catch (error) {
+      console.error('Error deleting device:', error);
+    }
+  };
+
   return (
     <CContainer>
       <CRow className="justify-content-center">
@@ -92,7 +103,7 @@ const Stok = () => {
             <CCardHeader>Stok Yönetimi</CCardHeader>
             <CCardBody>
               <CForm>
-                <CFormGroup>
+              <CFormGroup>
                   <CLabel>Cihazlar</CLabel>
                   <CListGroup>
                     {devices.map((device, index) => (
@@ -108,6 +119,7 @@ const Stok = () => {
                             style={{ width: '50px' }}
                           />
                           <CButton color="primary" onClick={() => handleIncrement(device.id, index)}>+</CButton>
+                          <CButton color="danger" onClick={() => handleDelete(device.id, index)} className="ml-2">Delete</CButton>
                         </div>
                       </CListGroupItem>
                     ))}
