@@ -13,6 +13,7 @@ const dealerRoute = require('./controller/routes/dealer')
 const sdRoute = require('./controller/routes/sd')
 const sdcRoute = require('./controller/routes/sdc')
 const reportsRoute = require('./controller/routes/reports')
+const stockRoute = require('./controller/routes/stock')
 
 // eslint-disable-next-line require-jsdoc
 function startServer() {
@@ -38,6 +39,7 @@ function startServer() {
     app.use(sdRoute)
     app.use(sdcRoute)
     app.use(reportsRoute)
+    app.use(stockRoute)
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))

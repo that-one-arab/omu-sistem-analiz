@@ -9,6 +9,7 @@ import {
     CCardHeader,
     CCol,
     CRow,
+    CContainer,
 } from '@coreui/react'
 import customFetch from '../custom-fetch'
 
@@ -114,7 +115,6 @@ const DailyCash = () => {
         })
     }
 
-
     const calculateTotal = () => {
         let total = 0
         for (const key in transactions) {
@@ -135,177 +135,207 @@ const DailyCash = () => {
     }
 
     return (
-        <CCard>
-            <CCardHeader>Günlük Kasa</CCardHeader>
-            <CCardBody>
-                <CRow>
-                    <CFormGroup>
-                        <CCol xs={3}>
-                            <CLabel>Tarih</CLabel>
-                            <br />
-                            <CInput
-                                type="date"
-                                value={date}
-                                onChange={handleDateChange}
-                            />
-                        </CCol>
-                    </CFormGroup>
-                </CRow>
-                <CRow>
-                    <CFormGroup>
-                        <CCol xs={3}>
-                            <CLabel>Sanal Para</CLabel>
-                            <CInput
-                                type="number"
-                                name="sanalpara"
-                                value={transactions.sanalpara}
-                                onChange={handleInputChange}
-                                disabled={formDisabled}
-                            />
-                        </CCol>
-                        <CCol>
-                            <CInput
-                                type="text"
-                                name="sanalparadesc"
-                                placeholder="Açıklama"
-                                value={descriptions.sanalparadesc}
-                                onChange={handleDescriptionChange}
-                                disabled={formDisabled}
+        <CContainer>
+            <CRow className="justify-content-center">
+                <CCol md="8">
+                    <CCard>
+                        <CCardHeader>Günlük Kasa</CCardHeader>
+                        <CCardBody>
+                            <CRow>
+                                <CFormGroup>
+                                    <CCol xs={3}>
+                                        <CLabel>Tarih</CLabel>
+                                        <br />
+                                        <CInput
+                                            type="date"
+                                            value={date}
+                                            onChange={handleDateChange}
+                                        />
+                                    </CCol>
+                                </CFormGroup>
+                            </CRow>
+                            <CRow>
+                                <CFormGroup>
+                                    <CCol xs={3}>
+                                        <CLabel>Sanal Para</CLabel>
+                                        <CInput
+                                            type="number"
+                                            name="sanalpara"
+                                            value={transactions.sanalpara}
+                                            onChange={handleInputChange}
+                                            disabled={formDisabled}
+                                        />
+                                    </CCol>
+                                    <CCol>
+                                        <CInput
+                                            type="text"
+                                            name="sanalparadesc"
+                                            placeholder="Açıklama"
+                                            value={descriptions.sanalparadesc}
+                                            onChange={handleDescriptionChange}
+                                            disabled={formDisabled}
+                                        />
+                                    </CCol>
+                                </CFormGroup>
+                            </CRow>
+                            <CRow>
+                                <CFormGroup>
+                                    <CFormGroup>
+                                        <CCol xs={3}>
+                                            <CLabel>Cihaz Satışı</CLabel>
+                                            <CInput
+                                                type="number"
+                                                name="cihazsatisi"
+                                                value={transactions.cihazsatisi}
+                                                onChange={handleInputChange}
+                                                disabled={formDisabled}
+                                            />
+                                        </CCol>
+                                        <CCol>
+                                            <CInput
+                                                type="text"
+                                                name="cihazsatisidesc"
+                                                placeholder="Açıklama"
+                                                value={
+                                                    descriptions.cihazsatisidesc
+                                                }
+                                                onChange={
+                                                    handleDescriptionChange
+                                                }
+                                                disabled={formDisabled}
+                                            />
+                                        </CCol>
+                                    </CFormGroup>
+                                </CFormGroup>
+                            </CRow>
+                            <CRow>
+                                <CFormGroup>
+                                    <CFormGroup>
+                                        <CCol xs={3}>
+                                            <CLabel>Aksesuar Satışı</CLabel>
+                                            <CInput
+                                                type="number"
+                                                name="aksesuarsatisi"
+                                                value={
+                                                    transactions.aksesuarsatisi
+                                                }
+                                                onChange={handleInputChange}
+                                                disabled={formDisabled}
+                                            />
+                                        </CCol>
+                                        <CCol>
+                                            <CInput
+                                                type="text"
+                                                name="aksesuarsatisidesc"
+                                                placeholder="Açıklama"
+                                                value={
+                                                    descriptions.aksesuarsatisidesc
+                                                }
+                                                onChange={
+                                                    handleDescriptionChange
+                                                }
+                                                disabled={formDisabled}
+                                            />
+                                        </CCol>
+                                    </CFormGroup>
+                                </CFormGroup>
+                            </CRow>
+                            <CRow>
+                                <CFormGroup>
+                                    <CCol xs={3}>
+                                        <CLabel>Diğer Gelirler</CLabel>
+                                        <CInput
+                                            type="number"
+                                            name="digergelirler"
+                                            value={transactions.digergelirler}
+                                            onChange={handleInputChange}
+                                            disabled={formDisabled}
+                                        />
+                                    </CCol>
+                                    <CCol>
+                                        <CInput
+                                            type="text"
+                                            name="digergelirlerdesc"
+                                            placeholder="Açıklama"
+                                            value={
+                                                descriptions.digergelirlerdesc
+                                            }
+                                            onChange={handleDescriptionChange}
+                                            disabled={formDisabled}
+                                        />
+                                    </CCol>
+                                </CFormGroup>
+                            </CRow>
+                            <CRow>
+                                <CFormGroup>
+                                    <CCol xs={3}>
+                                        <CLabel>Diğer Giderler</CLabel>
+                                        <CInput
+                                            type="number"
+                                            name="digergiderler"
+                                            value={transactions.digergiderler}
+                                            onChange={handleInputChange}
+                                            disabled={formDisabled}
+                                        />
+                                    </CCol>
+                                    <CCol>
+                                        <CInput
+                                            type="text"
+                                            name="digergiderlerdesc"
+                                            placeholder="Açıklama"
+                                            value={
+                                                descriptions.digergiderlerdesc
+                                            }
+                                            onChange={handleDescriptionChange}
+                                            disabled={formDisabled}
+                                        />
+                                    </CCol>
+                                </CFormGroup>
+                            </CRow>
 
-                            />
-                        </CCol>
-                    </CFormGroup>
-                </CRow>
-                <CRow>
-                    <CFormGroup>
-                        <CFormGroup>
-                            <CCol xs={3}>
-                                <CLabel>Cihaz Satışı</CLabel>
-                                <CInput
-                                    type="number"
-                                    name="cihazsatisi"
-                                    value={transactions.cihazsatisi}
-                                    onChange={handleInputChange}
-                                    disabled={formDisabled}
-                                />
-                            </CCol>
-                            <CCol>
-                                <CInput
-                                    type="text"
-                                    name="cihazsatisidesc"
-                                    placeholder="Açıklama"
-                                    value={descriptions.cihazsatisidesc}
-                                    onChange={handleDescriptionChange}
-                                    disabled={formDisabled}
-                                />
-                            </CCol>
-                        </CFormGroup>
-                    </CFormGroup>
-                </CRow>
-                <CRow>
-                    <CFormGroup>
-                        <CFormGroup>
-                            <CCol xs={3}>
-                                <CLabel>Aksesuar Satışı</CLabel>
-                                <CInput
-                                    type="number"
-                                    name="aksesuarsatisi"
-                                    value={transactions.aksesuarsatisi}
-                                    onChange={handleInputChange}
-                                    disabled={formDisabled}
-                                />
-                            </CCol>
-                            <CCol>
-                                <CInput
-                                    type="text"
-                                    name="aksesuarsatisidesc"
-                                    placeholder="Açıklama"
-                                    value={descriptions.aksesuarsatisidesc}
-                                    onChange={handleDescriptionChange}
-                                    disabled={formDisabled}
-                                />
-                            </CCol>
-                        </CFormGroup>
-                    </CFormGroup>
-                </CRow>
-                <CRow>
-                    <CFormGroup>
-                        <CCol xs={3}>
-                            <CLabel>Diğer Gelirler</CLabel>
-                            <CInput
-                                type="number"
-                                name="digergelirler"
-                                value={transactions.digergelirler}
-                                onChange={handleInputChange}
-                                disabled={formDisabled}
-                            />
-                        </CCol>
-                        <CCol>
-                            <CInput
-                                type="text"
-                                name="digergelirlerdesc"
-                                placeholder="Açıklama"
-                                value={descriptions.digergelirlerdesc}
-                                onChange={handleDescriptionChange}
-                                disabled={formDisabled}
-                            />
-                        </CCol>
-                    </CFormGroup>
-                </CRow>
-                <CRow>
-                    <CFormGroup>
-                        <CCol xs={3}>
-                            <CLabel>Diğer Giderler</CLabel>
-                            <CInput
-                                type="number"
-                                name="digergiderler"
-                                value={transactions.digergiderler}
-                                onChange={handleInputChange}
-                                disabled={formDisabled}
-                            />
-                        </CCol>
-                        <CCol>
-                            <CInput
-                                type="text"
-                                name="digergiderlerdesc"
-                                placeholder="Açıklama"
-                                value={descriptions.digergiderlerdesc}
-                                onChange={handleDescriptionChange}
-                                disabled={formDisabled}
-                            />
-                        </CCol>
-                    </CFormGroup>
-                </CRow>
+                            <CRow>
+                                <CFormGroup>
+                                    <CCol xs={12}>
+                                        <CLabel>Toplam</CLabel>
+                                        <CInput
+                                            type="number"
+                                            name="toplam"
+                                            value={calculateTotal()}
+                                        />
+                                    </CCol>
+                                </CFormGroup>
+                            </CRow>
 
-                <CRow>
-                    <CFormGroup>
-                        <CCol xs={12}>
-                            <CLabel>Toplam</CLabel>
-                            <CInput
-                                type="number"
-                                name="toplam"
-                                value={calculateTotal()}
-                            />
-                        </CCol>
-                    </CFormGroup>
-                </CRow>
+                            <div>Toplam: {calculateTotal()}</div>
 
-                <div>Toplam: {calculateTotal()}</div>
-
-                <CRow>
-                    <CCol xs={2}>
-                        <CButton color="primary" disabled={formDisabled || calculateTotal() <= 0} onClick={handleSubmit}>
-                            Kaydet
-                        </CButton>
-                    </CCol>
-                    <CCol xs={2}>
-                        <CButton color="danger" disabled={!formDisabled} onClick={handleDelete}>
-                            Sil
-                        </CButton>
-                    </CCol>
-                </CRow>
-            </CCardBody>
-        </CCard>
+                            <CRow>
+                                <CCol xs={2}>
+                                    <CButton
+                                        color="primary"
+                                        disabled={
+                                            formDisabled ||
+                                            calculateTotal() <= 0
+                                        }
+                                        onClick={handleSubmit}
+                                    >
+                                        Kaydet
+                                    </CButton>
+                                </CCol>
+                                <CCol xs={2}>
+                                    <CButton
+                                        color="danger"
+                                        disabled={!formDisabled}
+                                        onClick={handleDelete}
+                                    >
+                                        Sil
+                                    </CButton>
+                                </CCol>
+                            </CRow>
+                        </CCardBody>
+                    </CCard>
+                </CCol>
+            </CRow>
+        </CContainer>
     )
 }
 

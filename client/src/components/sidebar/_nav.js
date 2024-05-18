@@ -81,6 +81,12 @@ export const satisdestekchef_nav =  [
     name: 'Kasa',
     to: '/sdc/kasa',
     icon: <i className="fas fa-cash-register c-sidebar-nav-icon"></i>
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Stok',
+    to: '/sdc/stok',
+    icon: <i className="fas fa-cubes c-sidebar-nav-icon"></i>
   }
   // {
   //   _tag: 'CSidebarNavItem',

@@ -1,6 +1,7 @@
 
 import {lazy} from 'react';
 import Kasa from '../../views/Kasa';
+import Stok from '../../views/Stok';
 
 const Anasayfa = lazy(() => import('../../views/anasayfa/Anasayfa'));
 const YeniBasvuru = lazy(() => import("../../views/yenibasvuru/YeniBasvuru"));
@@ -43,7 +44,8 @@ const routes = [
   { path: "/bayi/rapor/kazanc/detay/:id", exact: true, name: 'Bayi kazanç raporlar detayı', component: KazancRaporDetay},
   { path: "/sdc/hizmetler", exact: true, name: 'Hizmetler', component: Hizmetler},
   { path: "/sdc/hedefler", exact: true, name: 'Hedefler', component: Hedefler},
-  {path: "/sdc/kasa", exact: true, name: 'Kasa', component: Kasa}
+  {path: "/sdc/kasa", exact: true, name: 'Kasa', component: Kasa},
+  { path: '/sdc/stok', exact: true, name: 'sdc', component: Stok}
 ];
 
 export default routes;

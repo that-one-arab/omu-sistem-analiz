@@ -133,6 +133,13 @@ create table if not exists public.daily_reports
 (
     date date primary key
 );
+
+-- Table: devices
+CREATE TABLE devices (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    count INTEGER NOT NULL DEFAULT 0
+  );
 `;
 
 (async function () {
