@@ -62,8 +62,8 @@ const updateApplicationPhase2 = async (
         if (statusChange === 'approved') {
             // get the offer name and service name
             const getServiceAndOffer = await client.query(
-                'SELECT selected_service, selected_offer FROM sales_applications_details WHERE id = 3',
-                []
+                'SELECT selected_service, selected_offer FROM sales_applications_details WHERE id = $1',
+                [appID]
             )
             const { selected_service: serviceId, selected_offer: offerId } =
                 getServiceAndOffer.rows[0]
@@ -100,10 +100,19 @@ const updateApplicationPhase2 = async (
                     new Date(),
                 ]
             )
+
+            console.log('Transaction record inserted')
+
             // update user's balance
             await client.query(
                 'UPDATE login SET balance = balance + $1 WHERE user_id = $2',
                 [offerValue, submitter]
+            )
+            console.log(
+                'User balance updated. var: offerValue = ' +
+                    offerValue +
+                    ', submitter = ' +
+                    submitter
             )
 
             // update the transaction_id column for the respective application

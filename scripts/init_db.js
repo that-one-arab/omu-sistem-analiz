@@ -100,6 +100,39 @@ CREATE TABLE goals (
     for_user_id INTEGER NOT NULL,
     FOREIGN KEY (for_user_id) REFERENCES login(user_id)
 );
+
+
+-- Table: kasa_transactions
+create table if not exists public.kasa_transactions
+(
+    date           date
+        references public.daily_reports
+            on delete cascade,
+    sanalpara      integer,
+    cihazsatisi    integer,
+    aksesuarsatisi integer,
+    digergelirler  integer,
+    digergiderler  integer
+);
+
+-- Table: descriptions
+create table if not exists public.descriptions
+(
+    date               date
+        references public.daily_reports
+            on delete cascade,
+    sanalparadesc      text,
+    cihazsatisidesc    text,
+    aksesuarsatisidesc text,
+    digergelirlerdesc  text,
+    digergiderlerdesc  text
+);
+
+-- Table: daily_reports
+create table if not exists public.daily_reports
+(
+    date date primary key
+);
 `;
 
 (async function () {

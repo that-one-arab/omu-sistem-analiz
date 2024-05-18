@@ -100,7 +100,7 @@ const initUsers = async () => {
 
         const hash = await bcrypt.hash(user.password, 10)
         await pool.query(
-            "INSERT INTO login(username, hash, role, active, register_date, email, name, assigned_area) VALUES($1, $2, $3, true, CURRENT_DATE, $4, $5, 'ilkadim') RETURNING email",
+            "INSERT INTO login(username, hash, role, active, register_date, email, name, assigned_area, balance) VALUES($1, $2, $3, true, CURRENT_DATE, $4, $5, 'ilkadim', 0) RETURNING email",
             [user.name, hash, user.role, user.email, user.name]
         )
     }

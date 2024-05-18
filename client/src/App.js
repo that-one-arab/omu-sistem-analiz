@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
-import { Offline, Online } from "react-detect-offline";
+// import { Offline, Online } from "react-detect-offline";
 import './scss/style.scss';
 import "./app.css";
 import AuthHOC from './views/authHOC/AuthHOC';
@@ -85,7 +85,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Offline>
+        {/* <Offline>
           <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw', height: '100vh'}}>
             <div className="text-center">
               <h1>Uygulama Çalışmıyor</h1>
@@ -93,8 +93,8 @@ class App extends Component {
               <h3>Lütfen internet bağlantınızı kontrol edin</h3>
             </div>
           </div>
-        </Offline>
-        <Online>
+        </Offline> */}
+        {/* <Online> */}
           <React.Suspense fallback={loading}>
             <Switch>
                 <ErrorBoundary>
@@ -104,7 +104,7 @@ class App extends Component {
                 </ErrorBoundary>
             </Switch>
           </React.Suspense>        
-        </Online>
+        {/* </Online> */}
       </React.Fragment>
     );
   }

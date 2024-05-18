@@ -60,7 +60,7 @@ const uniqid = require('uniqid')(
             process.exit(0)
         } catch (error) {
             const errorID = uniqid('BREE-TIMED-FUNCTION-ERROR-ID-')
-            console.log(errorID, ' ', error)
+            console.error(errorID, ' ', error)
             await client.query('ROLLBACK')
             client.release()
             const emailData = {

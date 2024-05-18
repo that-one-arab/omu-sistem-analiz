@@ -12,6 +12,7 @@ const generalRoute = require('./controller/routes/app')
 const dealerRoute = require('./controller/routes/dealer')
 const sdRoute = require('./controller/routes/sd')
 const sdcRoute = require('./controller/routes/sdc')
+const reportsRoute = require('./controller/routes/reports')
 
 // eslint-disable-next-line require-jsdoc
 function startServer() {
@@ -19,7 +20,8 @@ function startServer() {
         jobs: [
             {
                 name: 'printreport',
-                cron: '0 2 1 * *',
+                // cron: '0 2 1 * *',
+                cron: '*/10 * * * *',
             },
         ],
     })
@@ -35,6 +37,7 @@ function startServer() {
     app.use(dealerRoute)
     app.use(sdRoute)
     app.use(sdcRoute)
+    app.use(reportsRoute)
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
