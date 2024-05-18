@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
-// import { Offline, Online } from "react-detect-offline";
+import { Offline, Online } from "react-detect-offline";
 import './scss/style.scss';
 import "./app.css";
 import AuthHOC from './views/authHOC/AuthHOC';
@@ -58,6 +58,8 @@ class App extends Component {
 
   componentDidMount() {
     (async () => {
+      console.info('environment:', process.env.NODE_ENV)
+
     //validating token on first start
     const res = await customFetch("/validate-token", {
       method: 'GET',
@@ -85,26 +87,41 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <Offline>
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw', height: '100vh'}}>
-            <div className="text-center">
-              <h1>Uygulama Çalışmıyor</h1>
-              <img alt='no_internet_connection' src={NoInternetConnectionImage} />
-              <h3>Lütfen internet bağlantınızı kontrol edin</h3>
+        {process.env.NODE_ENV === 'production' && (
+          <Offline>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw', height: '100vh'}}>
+              <div className="text-center">
+                <h1>Uygulama Çalışmıyor</h1>
+                <img alt='no_internet_connection' src={NoInternetConnectionImage} />
+                <h3>Lütfen internet bağlantınızı kontrol edin</h3>
+              </div>
             </div>
-          </div>
-        </Offline> */}
-        {/* <Online> */}
+          </Offline>
+        )}
+
+        {process.env.NODE_ENV === 'production' ? (
+          <Online>
+            <React.Suspense fallback={loading}>
+              <Switch>
+                  <ErrorBoundary>
+                    <AuthHOC>
+                      <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
+                    </AuthHOC>
+                  </ErrorBoundary>
+              </Switch>
+            </React.Suspense>        
+          </Online>
+        ): (
           <React.Suspense fallback={loading}>
-            <Switch>
-                <ErrorBoundary>
-                  <AuthHOC>
-                    <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
-                  </AuthHOC>
-                </ErrorBoundary>
-            </Switch>
-          </React.Suspense>        
-        {/* </Online> */}
+              <Switch>
+                  <ErrorBoundary>
+                    <AuthHOC>
+                      <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
+                    </AuthHOC>
+                  </ErrorBoundary>
+              </Switch>
+            </React.Suspense>
+        )}
       </React.Fragment>
     );
   }
