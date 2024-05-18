@@ -1,4 +1,4 @@
-const pool = require('./controller/database')
+const pool = require('../controller/database')
 const mailgun = require('./lib/mailgun')
 const { parentPort } = require('worker_threads')
 const uniqid = require('uniqid')(

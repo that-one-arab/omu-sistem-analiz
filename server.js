@@ -32,7 +32,6 @@ function startServer() {
 
     app.use(express.json())
     app.use(express.static(path.join(__dirname, 'client', 'build')))
-    // app.use(express.static("public"));
     app.use(verifyRoute)
     app.use(generalRoute)
     app.use(dealerRoute)
