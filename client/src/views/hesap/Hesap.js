@@ -24,7 +24,6 @@ const patchPassword = async (password) => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'authorization': `Bearer ${document.cookie.slice(8)} `
         },
         body: JSON.stringify({password})
       })
@@ -39,7 +38,6 @@ const patchName = async (name) => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'authorization': `Bearer ${document.cookie.slice(8)} `
         },
         body: JSON.stringify({name})
       })
@@ -92,7 +90,6 @@ const Hesap = () => {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
               }
             })
         const data = await res.json()

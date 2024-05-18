@@ -10,7 +10,6 @@ const fetchData = async(service, id, month, year) => {
   const res = await customFetch(`/applications/details?service=${service}&userID=${id}&month=${month}&year=${year}`, {
     headers: {
       'content-type': 'application/json',
-      'authorization' :`Bearer ${document.cookie.slice(8)} `
     }
   })
   const fetchData = await res.json()

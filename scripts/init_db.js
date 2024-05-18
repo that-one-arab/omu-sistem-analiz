@@ -102,6 +102,12 @@ CREATE TABLE goals (
 );
 
 
+-- Table: daily_reports
+create table if not exists public.daily_reports
+(
+    date date primary key
+);
+
 -- Table: kasa_transactions
 create table if not exists public.kasa_transactions
 (
@@ -128,11 +134,6 @@ create table if not exists public.descriptions
     digergiderlerdesc  text
 );
 
--- Table: daily_reports
-create table if not exists public.daily_reports
-(
-    date date primary key
-);
 
 -- Table: devices
 CREATE TABLE devices (

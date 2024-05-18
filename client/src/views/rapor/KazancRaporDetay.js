@@ -79,7 +79,6 @@ const RaporDetay = ({match, location}) => {
       const res = await customFetch(`/report/transactions?reportID=${id}`, {
         headers: {
           'content-type': 'application/json',
-          'authorization' :`Bearer ${document.cookie.slice(8)} `
         }
       })
       if (res.status === 200) {

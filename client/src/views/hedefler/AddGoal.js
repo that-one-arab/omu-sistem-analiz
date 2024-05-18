@@ -80,7 +80,6 @@ const AddGoal = ({ modalOn, setModal, goals, dealer, month, year, toasters, trig
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
             },
             body: JSON.stringify({
                 userID: dealerID,
@@ -106,7 +105,6 @@ const AddGoal = ({ modalOn, setModal, goals, dealer, month, year, toasters, trig
             const res = await customFetch(`/services?active=true` , {
                 headers: {
                   'content-type': 'application/json',
-                  'authorization' :`Bearer ${document.cookie.slice(8)} `
                 }
             })
             if (res.status === 200) {

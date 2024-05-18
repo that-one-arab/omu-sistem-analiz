@@ -68,7 +68,6 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
-              'authorization': `Bearer ${document.cookie.slice(8)} `
             },
             body: JSON.stringify({
               newOfferName : newName
@@ -89,7 +88,6 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newOfferName : newName
@@ -105,7 +103,6 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newOfferDescription: newDescription
@@ -122,7 +119,6 @@ export const ModifyOffer = ({offer, show, setModal, toasters, triggerToaster, re
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newOfferValue: newValue
@@ -230,7 +226,6 @@ export const ConfirmDeleteModal = ({ modalOn, setModal, serviceID, toasters, tri
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
               }
         })
         if (res.status === 200) {
@@ -300,7 +295,6 @@ export const ModifyService = ({ modalOn, setModal, service, toasters, triggerToa
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newServiceName
@@ -316,7 +310,6 @@ export const ModifyService = ({ modalOn, setModal, service, toasters, triggerToa
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newServiceDescription
@@ -455,7 +448,6 @@ export const AddService = ({ modalOn, setModal, toasters, triggerToaster, refetc
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'authorization': `Bearer ${document.cookie.slice(8)} `
             },
             body: JSON.stringify({
               newServiceName,
@@ -601,7 +593,6 @@ export const AddOffer = ({ modalOn, setModal, toasters, triggerToaster, refetch,
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'authorization': `Bearer ${document.cookie.slice(8)} `
             },
             body: JSON.stringify({
               newOfferName,

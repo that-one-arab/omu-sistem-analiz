@@ -233,9 +233,6 @@ class YeniBasvuru extends React.Component {
         try {
           const res = await customFetch("/applications", {
             method: "POST",
-            headers: {
-            'authorization' :`Bearer ${document.cookie.slice(8)} `
-            },
             body: formData
           })
           if (res.status === 200 ) {
@@ -332,9 +329,6 @@ class YeniBasvuru extends React.Component {
           console.log("fetching")
           const res = await customFetch("/bayi/basvuru/yeni", {
             method: "POST",
-            headers: {
-            'authorization' :`Bearer ${document.cookie.slice(8)} `
-            },
             body: formData
           })
           const data = await res.json()

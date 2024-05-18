@@ -59,7 +59,6 @@ const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) =>
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newOfferName : newName
@@ -75,7 +74,6 @@ const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) =>
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newOfferDescription: newDescription
@@ -92,7 +90,6 @@ const OfferEdit = ({offer, show, onClose, toasters, triggerToaster, refetch}) =>
                 method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${document.cookie.slice(8)} `
                   },
                   body: JSON.stringify({
                     newOfferValue: newValue

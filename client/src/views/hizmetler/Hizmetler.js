@@ -70,7 +70,6 @@ const Hizmetler = () => {
         const res = await customFetch("/services?active=true", {
             headers: {
               'content-type': 'application/json',
-              'authorization' :`Bearer ${document.cookie.slice(8)} `
             }
         })
         let data = []
@@ -92,7 +91,6 @@ const Hizmetler = () => {
         const res = await customFetch(`/service/${selectedService}?active=true`, {
             headers: {
               'content-type': 'application/json',
-              'authorization' :`Bearer ${document.cookie.slice(8)} `
             }
         })
         let data

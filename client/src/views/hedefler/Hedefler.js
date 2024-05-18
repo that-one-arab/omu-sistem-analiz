@@ -27,7 +27,6 @@ const Hedefler = () => {
         const res = await customFetch(`/goal?userID=${dealer.user_id}&month=${month}&year=${year}` , {
             headers: {
               'content-type': 'application/json',
-              'authorization' :`Bearer ${document.cookie.slice(8)} `
             }
         })
         if (res.status === 200) {

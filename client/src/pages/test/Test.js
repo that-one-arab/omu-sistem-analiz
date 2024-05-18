@@ -33,8 +33,6 @@ const Test = () => {
   const onImageUpload = async () => {
     const formData = new FormData()
     formData.append("myFile", image)
-    // const plainFormData = Object.fromEntries(formData.entries());
-    // const formDataJsonString = JSON.stringify(plainFormData);
     try {
       const res = await customFetch("/upload", {
         method: "POST",

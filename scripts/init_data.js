@@ -6,11 +6,11 @@ const bcrypt = require('bcrypt')
 // Initiate the services table with 5 services
 
 const services = [
-    { name: 'service1', active: true, profitable: true },
-    { name: 'service2', active: true, profitable: true },
-    { name: 'service3', active: true, profitable: false },
-    { name: 'service4', active: true, profitable: false },
-    { name: 'service5', active: true, profitable: true },
+    { name: 'DSL Modemsiz', active: true, profitable: true },
+    { name: 'Taahüt', active: true, profitable: true },
+    { name: 'DSL Modemli', active: true, profitable: false },
+    { name: 'Tivibu', active: true, profitable: false },
+    { name: 'PSTN', active: true, profitable: true },
 ]
 
 const insertService = async (service) => {
@@ -33,27 +33,112 @@ const initServices = async () => {
 // Initiatlize the offers table with 5 offers for each service
 
 const offers = [
-    { service_id: 1, name: 'offer1', active: true, value: 100 },
-    { service_id: 1, name: 'offer2', active: true, value: 200 },
-    { service_id: 1, name: 'offer3', active: true, value: 300 },
-    { service_id: 1, name: 'offer4', active: true, value: 400 },
-    { service_id: 1, name: 'offer5', active: true, value: 500 },
-    { service_id: 2, name: 'offer1', active: true, value: 100 },
-    { service_id: 2, name: 'offer2', active: true, value: 200 },
-    { service_id: 2, name: 'offer3', active: true, value: 300 },
-    { service_id: 2, name: 'offer4', active: true, value: 400 },
-    { service_id: 2, name: 'offer5', active: true, value: 500 },
-    { service_id: 3, name: 'offer1', active: true, value: 100 },
-    { service_id: 3, name: 'offer2', active: true, value: 200 },
-    { service_id: 3, name: 'offer3', active: true, value: 300 },
-    { service_id: 3, name: 'offer4', active: true, value: 400 },
-    { service_id: 3, name: 'offer5', active: true, value: 500 },
-    { service_id: 4, name: 'offer1', active: true, value: 100 },
-    { service_id: 4, name: 'offer2', active: true, value: 200 },
-    { service_id: 4, name: 'offer3', active: true, value: 300 },
-    { service_id: 4, name: 'offer4', active: true, value: 400 },
-    { service_id: 4, name: 'offer5', active: true, value: 500 },
-    { service_id: 5, name: 'offer1', active: true, value: 100 },
+    {
+        service_id: 1,
+        name: 'İnternetsiz Ev Kalmasın',
+        active: true,
+        value: 100,
+    },
+    { service_id: 1, name: 'Hızlı 30mb İnternet', active: true, value: 200 },
+    {
+        service_id: 1,
+        name: 'Sınırsız İnternet Paketi',
+        active: true,
+        value: 300,
+    },
+    {
+        service_id: 1,
+        name: 'Fiber İnternet Kampanyası',
+        active: true,
+        value: 400,
+    },
+    {
+        service_id: 1,
+        name: 'Avantajlı İnternet Paketi',
+        active: true,
+        value: 500,
+    },
+    {
+        service_id: 2,
+        name: 'İnternetsiz Ev Kalmasın',
+        active: true,
+        value: 100,
+    },
+    { service_id: 2, name: 'Hızlı 30mb İnternet', active: true, value: 200 },
+    {
+        service_id: 2,
+        name: 'Sınırsız İnternet Paketi',
+        active: true,
+        value: 300,
+    },
+    {
+        service_id: 2,
+        name: 'Fiber İnternet Kampanyası',
+        active: true,
+        value: 400,
+    },
+    {
+        service_id: 2,
+        name: 'Avantajlı İnternet Paketi',
+        active: true,
+        value: 500,
+    },
+    {
+        service_id: 3,
+        name: 'İnternetsiz Ev Kalmasın',
+        active: true,
+        value: 100,
+    },
+    { service_id: 3, name: 'Hızlı 30mb İnternet', active: true, value: 200 },
+    {
+        service_id: 3,
+        name: 'Sınırsız İnternet Paketi',
+        active: true,
+        value: 300,
+    },
+    {
+        service_id: 3,
+        name: 'Fiber İnternet Kampanyası',
+        active: true,
+        value: 400,
+    },
+    {
+        service_id: 3,
+        name: 'Avantajlı İnternet Paketi',
+        active: true,
+        value: 500,
+    },
+    {
+        service_id: 4,
+        name: 'İnternetsiz Ev Kalmasın',
+        active: true,
+        value: 100,
+    },
+    { service_id: 4, name: 'Hızlı 30mb İnternet', active: true, value: 200 },
+    {
+        service_id: 4,
+        name: 'Sınırsız İnternet Paketi',
+        active: true,
+        value: 300,
+    },
+    {
+        service_id: 4,
+        name: 'Fiber İnternet Kampanyası',
+        active: true,
+        value: 400,
+    },
+    {
+        service_id: 4,
+        name: 'Avantajlı İnternet Paketi',
+        active: true,
+        value: 500,
+    },
+    {
+        service_id: 5,
+        name: 'İnternetsiz Ev Kalmasın',
+        active: true,
+        value: 100,
+    },
 ]
 
 const insertOffer = async (offer) => {

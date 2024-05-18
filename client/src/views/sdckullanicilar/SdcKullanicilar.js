@@ -65,7 +65,6 @@ const SdcKullanicilar = () => {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
-        'authorization' :`Bearer ${document.cookie.slice(8)} `
       }
     })
     if (res.status === 200) {
@@ -84,7 +83,6 @@ const SdcKullanicilar = () => {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
-        'authorization' :`Bearer ${document.cookie.slice(8)} `
       }
     })
     if (res.status === 200) {
@@ -101,7 +99,6 @@ const SdcKullanicilar = () => {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
-        'authorization' :`Bearer ${document.cookie.slice(8)} `
       }
     })
     setLoading(false)

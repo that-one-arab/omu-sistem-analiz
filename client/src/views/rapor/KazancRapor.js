@@ -45,7 +45,6 @@ const Rapor = () => {
       const res = await customFetch("/report/transactions", {
         headers: {
           'content-type': 'application/json',
-          'authorization' :`Bearer ${document.cookie.slice(8)} `
         }
       })
       if (res.status === 200) {

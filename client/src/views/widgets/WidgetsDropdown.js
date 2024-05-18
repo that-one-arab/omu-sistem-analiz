@@ -17,7 +17,6 @@ const Widget = ({color, fetchFrom, pushToLink, text}) => {
       const res = await customFetch(fetchFrom, {
         headers: {
           'content-type': 'application/json',
-          'authorization' :`Bearer ${document.cookie.slice(8)} `
         }
       });
       if (res.status === 200) {

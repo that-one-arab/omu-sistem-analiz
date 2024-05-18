@@ -77,7 +77,6 @@ const Services = ({selectedService, dispatch}) => {
         const res = await customFetch('/services', {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
             }
         })
         if (res.status === 200) {
@@ -132,7 +131,6 @@ const Offers = ({dispatch, isServiceSelected, selectedServiceID, selectedOffer }
         const res = await customFetch(`/service/${selectedServiceID}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
             }
         })
         if (res.status === 200) {
@@ -179,7 +177,6 @@ const Activator = () => {
         const res = await customFetch('/activator', {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
             }
         })
         if (res.status === 200) {
@@ -241,9 +238,6 @@ const YeniBasvuru = () => {
         try {
             const res = await customFetch("/applications", {
                 method: "POST",
-                headers: {
-                    'authorization' :`Bearer ${document.cookie.slice(8)} `
-                },
                 body: formData
             })
             if (res.status === 200) {

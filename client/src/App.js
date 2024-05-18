@@ -65,8 +65,6 @@ class App extends Component {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
-        //slice the work 'vitoken' from document.cookie
-        'authorization' :`Bearer ${document.cookie.slice(8)} `
         }
       })
       if (res.status === 200) {

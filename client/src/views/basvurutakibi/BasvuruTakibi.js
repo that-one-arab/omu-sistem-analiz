@@ -37,7 +37,6 @@ const BasvuruTakibi = () => {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'authorization' :`Bearer ${document.cookie.slice(8)} `
         }
       })
       if (res.status === 200) {

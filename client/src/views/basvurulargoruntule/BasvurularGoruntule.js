@@ -32,7 +32,6 @@ const BasvurularGoruntule = () => {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'authorization' :`Bearer ${document.cookie.slice(8)} `
         }
       })
       const fetchData = await res.json()

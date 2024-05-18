@@ -28,7 +28,6 @@ const HedefProgress = () => {
         const res = await customFetch('/goal?month=current&year=current', {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${document.cookie.slice(8)} `
             }
         })
         if (res.status === 200) {

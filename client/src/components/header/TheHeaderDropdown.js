@@ -29,7 +29,8 @@ const TheHeaderDropdown = () => {
           Hesap ayarları
         </CDropdownItem>
         <CDropdownItem onClick = {() => {
-            document.cookie = 'vitoken=eggkdjsewad67hgzshr6r0987rah68r0z76rh0z5075df7zh';
+            // document.cookie = 'vitoken=eggkdjsewad67hgzshr6r0987rah68r0z76rh0z5075df7zh';
+            localStorage.clear()
             dispatch({type: "LOGOUT"})
           }}>
           <CIcon name="cil-lock-locked" className="mfe-2" />

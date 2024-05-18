@@ -80,7 +80,6 @@ export const DealersField = memo(({setDealer}) => {
           const res = await customFetch(`/users`, {
               headers: {
                 'content-type': 'application/json',
-                'authorization' :`Bearer ${document.cookie.slice(8)} `
               }
           })
           if (res.status === 200) {

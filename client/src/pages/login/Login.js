@@ -66,7 +66,6 @@ class Login extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'authorization' :'Bearer '
       },
       body: JSON.stringify({
         email: this.state.email,
@@ -76,7 +75,8 @@ class Login extends React.Component {
     this.setState({loading: false})
     if (res.status === 200) {
       let data = await res.json()
-      document.cookie = `vitoken=${data.token}`
+      // document.cookie = `vitoken=${data.token}`
+      localStorage.setItem('vitoken', data.token)
       this.props.userLoggingin()
       this.props.fillUserInfo(data)
 
