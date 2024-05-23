@@ -234,17 +234,26 @@ const YeniBasvuru = () => {
         for (let i = 0; i < applicationImages.length; i++) {
             formData.append("image", applicationImages[i])
         }
+        // Display the key/value pairs
+        for (var pair of formData.entries()) {
+            console.log('Formdata entry: ', pair[0]+ ', ' + pair[1]); 
+        }
+        console.log("Appended all form fields to formData object")
 
         try {
+            console.log("Sending request... body: ", formData)
             const res = await customFetch("/applications", {
                 method: "POST",
                 body: formData
             })
+            console.log({res})
             if (res.status === 200) {
+                console.log("Request successfull.")
                 setModalOn(true)
                 resetInput()
                 dispatch({type: "SET_MODAL_TEXT_SUCCESS"})
             } else {
+                console.log("Request failed.")
                 const textFailurePayload = {
                     type: "SET_MODAL_TEXT_FAILURE",
                 }
@@ -264,9 +273,10 @@ const YeniBasvuru = () => {
                 setModalOn(true)
             }
         } catch (error) {
+            console.error(error)
             dispatch({type: "SET_MODAL_TEXT_FAILURE"})
+            setLoading(false)
         }
-
         setLoading(false)
     }
 
